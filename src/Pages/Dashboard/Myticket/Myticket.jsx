@@ -35,7 +35,11 @@ const Myticket = () => {
 
     setFilteredTickets(filtered);
   };
-
+  if (tickets.length === 0) {
+    return <div>
+      <h3 className="text-center mt-36 pb-24 text-xl">You didn't book any ticket!</h3>
+    </div>
+  }
   return (
     <div className="w-full  my-5 ">
       <div className="">

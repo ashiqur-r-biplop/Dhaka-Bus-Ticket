@@ -20,6 +20,7 @@ const Register = () => {
     createUserWithGoogle,
     user,
     setLoading,
+    setReload
   } = useContext(AuthContext);
 
   const [isAgreed, setIsAgreed] = useState(false);
