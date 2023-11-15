@@ -28,7 +28,7 @@ const AllUsers = () => {
   };
 
   return (
-    <div className="bg-orange-50 md:p-12">
+    <div className="bg-orange-50 ">
       <div className="p-4">
         <h1 className="text-center text-xl font-extrabold p-3">All Users Of</h1>
         <div className="flex items-center justify-center">
@@ -37,7 +37,7 @@ const AllUsers = () => {
           <i className="brand-color  text-3xl">Ticket</i>
         </div>
       </div>
-      <div className="flex w-full justify-center">
+      <div className="w-full justify-center">
         <div>
           <div className="">
             <button className="brand-btn btn-block p-2  transition duration-75">
@@ -51,8 +51,37 @@ const AllUsers = () => {
               />
             </button>
           </div>
+
           {/* table */}
-          <div className="">
+          <div className="md:hidden">
+        <table className="table  table-sm">
+
+          <tbody className="item-center">
+            {filteredUsers.map((user, index) => (
+              <tr
+                key={index}
+                className={
+                  index % 2 === 0 ? "text-orange-800 bg-slate-300 flex flex-col" : "text-black bg-red-300 flex flex-col"
+                }
+              >
+                <td className="sm:text-xl flex"><span className='text-white font-bold w-[30%] bg-orange-600 flex items-center justify-center -my-2 me-3'>Name: </span>{user.name}</td>
+                <hr className="font-bold" />
+                <td className="sm:text-xl flex"><span className='text-white font-bold w-[30%] bg-orange-600 flex items-center justify-center -my-2 me-3'>Email: </span>{user.email}</td>
+                <hr className="font-bold" />
+                <td className="sm:text-xl flex"><span className='text-white font-bold w-[30%] bg-orange-600 flex items-center justify-center -my-2 me-3'>Phone: </span>{user.phone}</td>
+                <hr className="font-bold" />
+                <td className="sm:text-xl flex"><span className='text-white font-bold w-[30%] bg-orange-600 flex items-center justify-center -my-2 me-3'>Role: </span>{user.role}</td>
+                <hr className="font-bold" />
+                <td className="sm:text-xl flex"><span className='text-white font-bold w-[30%] bg-orange-600 flex items-center justify-center -my-2 me-3'>Action: </span>Delete</td>
+                <hr className="font-bold border-2 border-white" />
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+
+          <div className="hidden md:block">
             <table className="table md:w-full my-2">
               {/* head */}
               <thead>
@@ -68,7 +97,7 @@ const AllUsers = () => {
                   <tr
                     key={index}
                     className={
-                      index % 2 === 0 ? "text-green-700 bg-green-100 border-b-2 border-green-300" : "text-orange-700 bg-yellow-100 border-b-2 border-yellow-500"
+                      index % 2 === 0 ? "text-orange-800 bg-slate-300" : "text-black bg-red-300"
                     }
                   >
                     <td className="md:flex md:items-center md:gap-2">

@@ -14,7 +14,7 @@ const PageBanner = ({ img, title, description }) => {
                 <div className="hero-content text-center text-neutral-content">
                     <div className="max-w-md">
                         <h1 className="mb-5 lg:text-6xl text-5xl text-orange-600 font-bold uppercase">{title}</h1>
-                        <p className="mb-5 text-white">{description}</p>
+                        <p className="mb-5 md:text-lg text-white">{description}</p>
 
                     </div>
                 </div>

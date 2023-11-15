@@ -66,6 +66,7 @@ const Services = () => {
           <div
             key={index}
             onMouseEnter={() => handleHover(step?.title)}
+            onMouseLeave={()=>handleHover("Discount & Promo")}
             className={`group shadow-xl rounded-md md:py-8 md:px-4 ${
               bgColor === step?.title ? "first-child cursor-pointer" : ""
             }`}

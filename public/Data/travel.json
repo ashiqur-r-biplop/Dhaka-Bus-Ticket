@@ -1,0 +1,63 @@
+[
+     {
+       "id": 1,
+       "cityName": "Cox's Bazar",
+       "description": "Cox's Bazar is famous for its long natural sea beach, often referred to as the 'Queen of the Bay of Bengal.' It's the perfect place for a beach holiday.",
+       "photo": "https://i.ibb.co/9pYFR37/Coxsbazar-sea-beach.jpg"
+     },
+     {
+       "id": 2,
+       "cityName": "Sundarbans",
+       "description": "The Sundarbans is a UNESCO World Heritage Site and the largest mangrove forest in the world. It's home to the Bengal tiger and various wildlife species.",
+       "photo": "https://i.ibb.co/VYCFV8W/A-Guide-to-Explore-the-Beautiful-Bangladesh.jpg"
+     },
+     {
+       "id": 3,
+       "cityName": "Sajek Valley",
+       "description": "Sajek Valley is a serene hill station in the Chittagong Hill Tracts, offering breathtaking landscapes and indigenous culture.",
+       "photo": "https://i.ibb.co/d47vt2M/Kingdom-of-Clouds-sajek-valley.jpg"
+     },
+     {
+       "id": 4,
+       "cityName": "Ratnodweep (Saint Martin's Island)",
+       "description": "Saint Martin's Island is a coral island known for its crystal-clear waters and vibrant marine life, making it a popular spot for snorkeling and diving.",
+       "photo": "https://i.ibb.co/MSN6vY9/Sint-Maarten-What-to-Do.jpg"
+     },
+     {
+       "id": 5,
+       "cityName": "Bandarban",
+       "description": "Bandarban is a hilly district with lush green landscapes, picturesque hills, and numerous tribal communities.",
+       "photo": "https://i.ibb.co/vDNBC0N/Bandarban-Bangladesh.jpg"
+     },
+     {
+       "id": 6,
+       "cityName": "Rangamati",
+       "description": "Rangamati is another beautiful hill district, famous for its Kaptai Lake and indigenous communities.",
+       "photo": "https://i.ibb.co/82RXsZt/55fb0b07-7d71-4ede-b93a-8926fc623383.jpg"
+     },
+     {
+       "id": 7,
+       "cityName": "Srimangal",
+       "description": "Srimangal is known as the 'Tea Capital of Bangladesh' and is famous for its tea gardens, lush greenery, and serene atmosphere.",
+       "photo": "https://i.ibb.co/bgXdTCY/Jaflong-Srimongol-Nature-Land-River-in-Sylet.jpg"
+     },
+     {
+       "id": 8,
+       "cityName": "Kuakata",
+       "description": "Kuakata is a unique sea beach where you can witness both sunrise and sunset over the Bay of Bengal, earning it the nickname 'Daughter of the Sea.'",
+       "photo": "https://i.ibb.co/WfjJ5hW/Kuakata-Sea-Beach.jpg"
+     },
+     {
+       "id": 9,
+       "cityName": "Paharpur",
+       "description": "Paharpur is home to the ancient Paharpur Vihara, a Buddhist monastery dating back to the 8th century, with rich historical and archaeological significance.",
+       "photo": "https://i.ibb.co/JKbsSrN/HERITAGE-SITE-IN-BANGLADESH-PAHARPUR.jpg"
+     },
+     {
+       "id": 10,
+       "cityName": "Mahasthangarh",
+       "description": "Mahasthangarh is an archaeological site in Bogra, known for its ancient ruins, including the fortified citadel and ancient relics from the Maurya and Gupta periods.",
+       "photo": "https://i.ibb.co/LCWgv9w/Photographic-Print-Ruins-of-Mahasthangarh-one-of-the-earliest-urban-archaeological-sites-in-Banglade.jpg"
+     }
+   ]
+   

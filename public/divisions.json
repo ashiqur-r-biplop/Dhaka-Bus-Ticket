@@ -1,0 +1,61 @@
+[
+  {
+    "name": "Dhaka",
+    "districts": [
+      "Dhaka",
+      "Narayanganj",
+      "Gazipur",
+      "Tangail",
+      "Manikganj",
+      "Munshiganj",
+      "Shariatpur",
+      "Narsingdi",
+      "Narshingdi",
+      "Gopalganj",
+      "Kishoreganj",
+      "Madaripur",
+      "Rajbari",
+      "Faridpur"
+    ]
+  },
+  {
+    "name": "Chattogram",
+    "districts": [
+      "Chattogram",
+      "Cox's Bazar",
+      "Feni",
+      "Comilla",
+      "Noakhali",
+      "Chandpur",
+      "Brahmanbaria",
+      "Lakshmipur",
+      "Khagrachari",
+      "Rangamati",
+      "Bandarban"
+    ]
+  },
+  {
+    "name": "Khulna",
+    "districts": ["Khulna", "Jessore", "Satkhira", "Bagerhat", "Magura", "Narail", "Meherpur", "Chuadanga", "Kushtia"]
+  },
+  {
+    "name": "Rajshahi",
+    "districts": ["Rajshahi", "Bogra", "Pabna", "Sirajganj", "Naogaon", "Natore", "Joypurhat", "Chapainawabganj"]
+  },
+  {
+    "name": "Barishal",
+    "districts": ["Barishal", "Patuakhali", "Bhola", "Pirojpur", "Jhalokati"]
+  },
+  {
+    "name": "Sylhet",
+    "districts": ["Sylhet", "Moulvibazar", "Habiganj", "Sunamganj"]
+  },
+  {
+    "name": "Rangpur",
+    "districts": ["Rangpur", "Dinajpur", "Thakurgaon", "Kurigram", "Lalmonirhat", "Nilphamari", "Panchagarh"]
+  },
+  {
+    "name": "Mymensingh",
+    "districts": ["Mymensingh", "Jamalpur", "Netrokona", "Sherpur"]
+  }
+]

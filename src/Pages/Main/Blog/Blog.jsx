@@ -11,7 +11,7 @@ const Blog = () => {
         title={"Blog"}
         description="Explore the fascinating world of buses with our blog. From the latest innovations in public transportation to historical journeys, we cover it all. Join us on a ride through the diverse and dynamic world of buses!"
       />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 ">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 mx-10 ">
           {blog.map((val,index) => (
            <div className='items shadow p-2' key={index}>
              <div >
@@ -29,8 +29,8 @@ const Blog = () => {
                  </span>
                  
                </div>
-               <h1 className="text-[22px] font-[400]">{val.title}</h1>
-               <p className="text-gray-600">{val.desc}</p>
+               <h1 className="text-[22px] font-[400] brand-color p-2">{val.title}</h1>
+               <p className="text-gray-600 p-2">{val.desc}</p>
              </div>
            </div>
           ))}

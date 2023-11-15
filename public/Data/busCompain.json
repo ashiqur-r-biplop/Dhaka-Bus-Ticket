@@ -1,0 +1,64 @@
+[
+     {
+       "company": "Greyhound",
+       "busModel": "Luxury Liner",
+       "releaseDate": "2022",
+       "pictureURL": "https://i.ibb.co/JsG50h7/Greyhound-Bus.jpg"
+     },
+     {
+       "company": "Mercedes-Benz",
+       "busModel": "Tourismo",
+       "releaseDate": "2021",
+       "pictureURL": "https://i.ibb.co/n6QdCx5/Mercedes-Benz-Travego-Edition-1-mercedes-benz.jpg"
+     },
+     {
+       "company": "Volvo Buses",
+       "busModel": "9700",
+       "releaseDate": "2023",
+       "pictureURL": "https://i.ibb.co/PNF52cy/Asian-Xpress-Volvo-Bus-Skin-ETS2-IN.jpg"
+     },
+     {
+       "company": "Scania",
+       "busModel": "Interlink",
+       "releaseDate": "2021",
+       "pictureURL": "https://i.ibb.co/R46nZmc/Scania-em-por-Gustavo-Carmona-ID-758049.jpg"
+     },
+     {
+       "company": "Neoplan",
+       "busModel": "Cityliner",
+       "releaseDate": "2022",
+       "pictureURL": "https://i.ibb.co/hB0wv3G/MAN-Neoplan-Bus-sketches-renderings.jpg"
+     },
+     {
+       "company": "MCI (Motor Coach Industries)",
+       "busModel": "J4500",
+       "releaseDate": "2020",
+       "pictureURL": "https://i.ibb.co/RYcGrm4/MCI-Bus-For-Sale-MC-6-Bus.jpg"
+     },
+     {
+       "company": "Nova Bus",
+       "busModel": "LFS",
+       "releaseDate": "2019",
+       "pictureURL": "https://i.ibb.co/L5H5JCw/Nova-Bus-electric-bus-at-APTA-Expo-2014.jpg"
+     },
+     {
+       "company": "Setra",
+       "busModel": "S 517 HDH",
+       "releaseDate": "2021",
+       "pictureURL": "https://i.ibb.co/hB0wv3G/MAN-Neoplan-Bus-sketches-renderings.jpg"
+     },
+     {
+       "company": "Solaris Bus & Coach",
+       "busModel": "Urbino 12",
+       "releaseDate": "2023",
+       "pictureURL": "https://i.ibb.co/L5H5JCw/Nova-Bus-electric-bus-at-APTA-Expo-2014.jpg"
+     },
+     {
+       "company": "Wrightbus",
+       "busModel": "StreetDeck",
+       "releaseDate": "2020",
+       "pictureURL": "https://i.ibb.co/vJ1S7Yb/London-s-Futuristic-New-Double-Decker-Bus-Hits-The.jpg"
+     }
+      
+   ]
+   

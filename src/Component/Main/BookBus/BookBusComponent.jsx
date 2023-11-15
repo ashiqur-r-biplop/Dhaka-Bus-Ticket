@@ -6,7 +6,10 @@ import payment from '../../../assets/payment.png'
 
 
 const BookBusComponent = () => {
-
+  const currentDate = new Date().toISOString().split('T')[0]; // Get current date in 'YYYY-MM-DD' format
+  const maxDate = new Date();
+  maxDate.setDate(maxDate.getDate() + 7); // Calculate 7 days ahead of the current date
+  const maxDateFormatted = maxDate.toISOString().split('T')[0];
   const loadUser = useContext(AuthContext);
   const user = loadUser.user;
   const { displayName, email } = user;
@@ -27,11 +30,12 @@ const BookBusComponent = () => {
 
   // *********Handle Modal****************************
   const [bookBusData, setBookBusData] = useState({});
+  const [journeyDate, setJourneyDate] = useState(null);
+  const [returnDate, setReturnDate] = useState(null);
   const handleModal = (e) => {
     e.preventDefault()
     const form = e.target;
-    const journeyDate = form.journeyDate.value;
-    const returnDate = form.returnDate.value;
+    // const returnDate = form.returnDate.value;
     const busType = form.busType.value;
     const originCity = form.originCity.value;
     const destinationCity = form.destinationCity.value;
@@ -61,7 +65,9 @@ const BookBusComponent = () => {
       amount: amount
     };
     setBookBusData(data)
-    document.getElementById('my_modal_4').showModal();
+    if (data) {
+      document.getElementById('my_modal_4').showModal();
+    }
   };
 
 
@@ -127,10 +133,13 @@ const BookBusComponent = () => {
                 </span>
               </label>
               <input
+                onChange={e => setJourneyDate(e.target.value)}
                 type="date"
                 placeholder="Pick date"
                 name="journeyDate"
                 className="input input-bordered h-10 rounded-md border-gray-300"
+                min={currentDate} // Set the minimum date to the current date
+                max={maxDateFormatted} // Set the maximum date to 7 days ahead of the current date
                 required
               />
             </div>
@@ -141,10 +150,13 @@ const BookBusComponent = () => {
                 </span>
               </label>
               <input
+                onChange={e => setReturnDate(e.target.value)}
                 type="date"
                 placeholder="Pick date"
-                name="returnDate"
+                name="journeyDate"
                 className="input input-bordered h-10 rounded-md border-gray-300"
+                min={currentDate} // Set the minimum date to the current date
+                max={maxDateFormatted} // Set the maximum date to 7 days ahead of the current date
                 required
               />
             </div>
@@ -246,11 +258,16 @@ const BookBusComponent = () => {
                 </span>
               </label>
               <input
-                onChange={(e) => setTotalBus(e.target.value)}
+                onChange={(e) => {
+                  const inputValue = parseInt(e.target.value, 10); // Parse input value as an integer
+                  const nonNegativeValue = Math.max(1, inputValue); // Ensure the value is at least 1
+                  setTotalBus(nonNegativeValue); // Update state with the non-negative value
+                }}
                 type="number"
                 placeholder=""
                 name="buses"
                 className="input input-bordered rounded-md h-10 border-gray-300"
+                min="1" // Set the minimum allowed value to 1
                 required
               />
             </div>

@@ -52,6 +52,7 @@ const TicketBookingSteps = () => {
           <div
             key={index}
             onMouseEnter={() => handleHover(step?.title)}
+            onMouseLeave={()=>handleHover("Booking & Confirm")}
             className={`group shadow-xl rounded-md md:py-8 md:px-4 ${
               bgColor === step?.title ? "first-child cursor-pointer" : ""
             }`}

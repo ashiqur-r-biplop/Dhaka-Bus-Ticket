@@ -1,0 +1,170 @@
+[
+    {
+        "division": "Dhaka",
+        "to": "Chattogram",
+        "date": "2023-11-10",
+        "schedule": "7:00 AM",
+        "busType": "AC",
+        "bookedSeat": []
+    },
+    {
+        "division": "Dhaka",
+        "to": "Khulna",
+        "date": "2023-11-10",
+        "schedule": "7:00 AM",
+        "busType": "AC",
+        "bookedSeat": []
+    },
+    {
+        "division": "Dhaka",
+        "to": "Rajshahi",
+        "date": "2023-11-10",
+        "schedule": "7:00 AM",
+        "busType": "AC",
+        "bookedSeat": []
+    },
+    {
+        "division": "Dhaka",
+        "to": "Barishal",
+        "date": "2023-11-10",
+        "schedule": "7:00 AM",
+        "busType": "AC",
+        "bookedSeat": []
+    },
+    {
+        "division": "Dhaka",
+        "to": "Sylhet",
+        "date": "2023-11-10",
+        "schedule": "7:00 AM",
+        "busType": "AC",
+        "bookedSeat": []
+    },
+    {
+        "division": "Dhaka",
+        "to": "Rangpur",
+        "date": "2023-11-10",
+        "schedule": "7:00 AM",
+        "busType": "AC",
+        "bookedSeat": []
+    },
+    {
+        "division": "Dhaka",
+        "to": "Mymensingh",
+        "date": "2023-11-10",
+        "schedule": "7:00 AM",
+        "busType": "AC",
+        "bookedSeat": []
+    },
+    {
+        "division": "Dhaka",
+        "to": "Chattogram",
+        "date": "2023-11-11",
+        "schedule": "7:00 AM",
+        "busType": "AC",
+        "bookedSeat": []
+    },
+    {
+        "division": "Dhaka",
+        "to": "Khulna",
+        "date": "2023-11-11",
+        "schedule": "7:00 AM",
+        "busType": "AC",
+        "bookedSeat": []
+    },
+    {
+        "division": "Dhaka",
+        "to": "Rajshahi",
+        "date": "2023-11-11",
+        "schedule": "7:00 AM",
+        "busType": "AC",
+        "bookedSeat": []
+    },
+    {
+        "division": "Dhaka",
+        "to": "Barishal",
+        "date": "2023-11-11",
+        "schedule": "7:00 AM",
+        "busType": "AC",
+        "bookedSeat": []
+    },
+    {
+        "division": "Dhaka",
+        "to": "Sylhet",
+        "date": "2023-11-11",
+        "schedule": "7:00 AM",
+        "busType": "AC",
+        "bookedSeat": []
+    },
+    {
+        "division": "Dhaka",
+        "to": "Rangpur",
+        "date": "2023-11-11",
+        "schedule": "7:00 AM",
+        "busType": "AC",
+        "bookedSeat": []
+    },
+    {
+        "division": "Dhaka",
+        "to": "Mymensingh",
+        "date": "2023-11-11",
+        "schedule": "7:00 AM",
+        "busType": "AC",
+        "bookedSeat": []
+    },
+    {
+        "division": "Dhaka",
+        "to": "Chattogram",
+        "date": "2023-11-12",
+        "schedule": "7:00 AM",
+        "busType": "AC",
+        "bookedSeat": []
+    },
+    {
+        "division": "Dhaka",
+        "to": "Khulna",
+        "date": "2023-11-12",
+        "schedule": "7:00 AM",
+        "busType": "AC",
+        "bookedSeat": []
+    },
+    {
+        "division": "Dhaka",
+        "to": "Rajshahi",
+        "date": "2023-11-12",
+        "schedule": "7:00 AM",
+        "busType": "AC",
+        "bookedSeat": []
+    },
+    {
+        "division": "Dhaka",
+        "to": "Barishal",
+        "date": "2023-11-12",
+        "schedule": "7:00 AM",
+        "busType": "AC",
+        "bookedSeat": []
+    },
+    {
+        "division": "Dhaka",
+        "to": "Sylhet",
+        "date": "2023-11-12",
+        "schedule": "7:00 AM",
+        "busType": "AC",
+        "bookedSeat": []
+    },
+    {
+        "division": "Dhaka",
+        "to": "Rangpur",
+        "date": "2023-11-12",
+        "schedule": "7:00 AM",
+        "busType": "AC",
+        "bookedSeat": []
+    },
+    {
+        "division": "Dhaka",
+        "to": "Mymensingh",
+        "date": "2023-11-12",
+        "schedule": "7:00 AM",
+        "busType": "AC",
+        "bookedSeat": []
+    }
+]
