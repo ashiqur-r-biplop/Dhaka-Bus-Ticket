@@ -26,7 +26,7 @@ const BookTicket = () => {
   const [allBus, setAllBus] = useState([]);
   const [control, setControl] = useState(false);
   useEffect(() => {
-    fetch("http://localhost:5000/all-bus")
+    fetch("https://dhaka-bus-ticket-server-two.vercel.app/all-bus")
       .then((res) => res.json())
       .then((data) => {
         setAllBus(data);
@@ -127,7 +127,7 @@ const BookTicket = () => {
         bus_id: busId,
         updateBookedSeat: updateBookedSeat,
       };
-      fetch("http://localhost:5000/book-ticket", {
+      fetch("https://dhaka-bus-ticket-server-two.vercel.app/book-ticket", {
         method: "PUT",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(updateTicketBooking),
@@ -152,7 +152,7 @@ const BookTicket = () => {
         .catch((err) => console.log(err));
 
       // Booked Seat and Post it with User Information:
-      fetch("http://localhost:5000/book-my-ticket", {
+      fetch("https://dhaka-bus-ticket-server-two.vercel.app/book-my-ticket", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(bookedTicketUsingUserInformation),

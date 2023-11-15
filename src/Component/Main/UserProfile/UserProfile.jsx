@@ -5,7 +5,6 @@ import axios from "axios";
 import UpdateUserProfileModal from "./UpdateUserProfileModal";
 
 const UserProfile = () => {
-     const [selectedContact, setSelectedContact] = useState(null);
   const defaultPhotoURL =
     "https://i.pinimg.com/1200x/0f/66/bc/0f66bc842998ed2c6f82f85f702b0e44.jpg";
 
@@ -13,31 +12,32 @@ const UserProfile = () => {
   console.log(user);
   const userEmail = user?.email;
   const photoURL = user?.photoURL;
-  // console.log(userEmail);
-
   const [control, setControl] = useState(false);
-  const [currentUser, setCurrentUser] = useState('');
+  const [currentUser, setCurrentUser] = useState({});
 
   const fetchData = async () => {
     try {
       if (userEmail) {
         const response = await fetch(
-          `http://localhost:5000/single-user?email=${userEmail}`
+          `https://dhaka-bus-ticket-server-two.vercel.app/single-user?email=${userEmail}`
         );
         if (!response.ok) {
           throw new Error("failed to fetch");
         }
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         setCurrentUser(data);
       }
     } catch (error) {
       console.log("Error fetching data", error);
     }
   };
+  console.log(userEmail);
   useEffect(() => {
      fetchData();
    }, [userEmail, control]);
+
+  console.log(currentUser, "35");
 
   const time = new Date();
   const year = time.getFullYear();
@@ -48,11 +48,35 @@ const UserProfile = () => {
     month,
     year,
   };
-  const handleViewClick = (contact) => {
-     setSelectedContact(contact);
-     const modal = document.getElementById("my_modal_1");
-     modal.showModal();
-   };
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const number = form.phone.value;
+    const userInfo = { name, number };
+    console.log(userInfo);
+    const url = ""
+    try {
+      axios
+        .patch(`https://dhaka-bus-ticket-server-two.vercel.app/single-user/${currentUser._id}`, userInfo)
+        .then((res) => {
+          console.log(res.data);
+
+          // Swal.fire({
+          //   position: "top",
+          //   icon: "success",
+          //   title: "User Profile Updated",
+          //   showConfirmButton: false,
+          //   timer: 1500,
+          // });
+        })
+        .catch((error) => { });
+    } catch (error) {
+      console.error("Error posting data:", error);
+    }
+    // form.reset();
+  };
+  const handleUpdate = () => { };
 
   return (
     <>
@@ -104,7 +128,38 @@ const UserProfile = () => {
             <p className="text-center rounded-md py-2 bg-white text-orange-600">
               My Billings
             </p>
-            <div>{/* maping kore info show korty pari */}</div>
+            <div>
+              <table className="table w-full md:w-full my-2">
+                {/* head */}
+                <thead>
+                  <tr className="text-xl md:text-2xl text-white bg-[#FF4500]">
+                    <th>Email </th>
+                    <th className="">TransId</th>
+                   
+                  </tr>
+                </thead>
+                <tbody className="item-center">
+                  {bills?.map((user, index) => (
+                    <tr
+                      key={index}
+                      className={
+                        index % 2 === 0
+                          ? "text-green-700 bg-green-100 border-b-2 border-green-300"
+                          : "text-orange-700 bg-yellow-100 border-b-2 border-yellow-500"
+                      }
+                    >
+                      {/* <td className="md:flex md:items-center md:gap-2">
+                        <span className="font-bold md:text-sm">
+                          {}
+                        </span>
+                      </td> */}
+                      <td className="font-semibold">{user.customerEmail}</td>
+                      <td className="font-semibold">{user.transitionId}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 

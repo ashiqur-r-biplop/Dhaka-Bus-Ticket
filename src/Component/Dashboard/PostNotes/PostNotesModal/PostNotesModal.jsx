@@ -11,7 +11,7 @@ const PostNotesModal = ({ control, setControl }) => {
       notice,
     };
     axios
-      .post("http://localhost:5000/post-note", postedNote)
+      .post("https://dhaka-bus-ticket-server-two.vercel.app/post-note", postedNote)
       .then((res) => {
         console.log(res.data?.insertedId);
         if (res.data?.insertedId) {

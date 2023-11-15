@@ -14,7 +14,13 @@ const Register = () => {
     reset,
   } = useForm();
 
-  const { createUserWithEmail, updateUserProfileName, createUserWithGoogle, user, setLoading } = useContext(AuthContext);
+  const {
+    createUserWithEmail,
+    updateUserProfileName,
+    createUserWithGoogle,
+    user,
+    setLoading,
+  } = useContext(AuthContext);
 
   const [isAgreed, setIsAgreed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -53,7 +59,7 @@ const Register = () => {
               role: userData.role,
             };
 
-            fetch(`http://localhost:5000/users`, {
+            fetch(`https://dhaka-bus-ticket-server-two.vercel.app/users`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -75,13 +81,20 @@ const Register = () => {
                   navigate(from, { replace: true });
                 }
                 reset();
+              })
+              .catch((error) => {
+                Swal.fire({
+                  icon: "warning",
+                  title: `${userData.name} User Registering Failed`,
+                  showConfirmButton: false,
+                  timer: 3000,
+                });
               });
-            reset();
           })
           .catch((error) => {
             Swal.fire({
               icon: "warning",
-              title: `${userData.name} Login Failed`,
+              title: `${userData.name} update Failed`,
               showConfirmButton: false,
               timer: 3000,
             });
@@ -111,7 +124,7 @@ const Register = () => {
           role: "user",
         };
 
-        fetch(`http://localhost:5000/users`, {
+        fetch(`https://dhaka-bus-ticket-server-two.vercel.app/users`, {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -204,7 +217,19 @@ const Register = () => {
               />
               {errors.confirmPassword && <span className="text-red-500">{errors.confirmPassword.message}</span>}
             </div>
-
+            <div className="flex flex-col">
+              <input
+                type="email"
+                name="email"
+                className={`bg-white rounded p-2 border focus:outline-none focus:border-orange-500 ${errors.email && "border-red-500"
+                  }`}
+                {...register("email", { required: "Email is required" })}
+                placeholder="Email or Username"
+              />
+              {errors.email && (
+                <span className="text-red-500">{errors.email.message}</span>
+              )}
+            </div>
             <div className="flex flex-col">
               <input
                 type="tel"
