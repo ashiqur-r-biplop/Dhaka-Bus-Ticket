@@ -103,7 +103,7 @@ const BookTicket = () => {
     console.log(data);
 
     setBookedTicketUsingUserInformation(data);
-    const url = `http://localhost:5000:5000/getSeat/${data?.from}&&${data?.to}&&${data?.date}&&${data?.busType}&&${data?.schedule}`;
+    const url = `http://localhost:5000/getSeat/${data?.from}&&${data?.to}&&${data?.date}&&${data?.busType}&&${data?.schedule}`;
     setLoadSeat(true)
     // Make the GET request
     fetch(url, {
