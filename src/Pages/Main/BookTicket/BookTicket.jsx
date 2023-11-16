@@ -18,6 +18,7 @@ const BookTicket = () => {
   // *****************All District Information and functionality:
   const [selectedDivision, setSelectedDivision] = useState('Dhaka');
   const [selectedDivisionTo, setSelectedDivisionTo] = useState('Dhaka');
+  const [fromDistrict, setFromDistrict] = useState('Dhaka');
   const districtData = {
     Dhaka: ["Dhaka", "Gazipur", "Tangail", "Munshiganj", "Narayanganj"],
     Chattogram: ["Chattogram", "Cox's Bazar", "Comilla", "Feni", "Noakhali"],
@@ -67,6 +68,8 @@ const BookTicket = () => {
     }
   };
 
+  // For Loading Seat:
+  const [loadSeat, setLoadSeat] = useState(false);
   // Booked Ticket Using User Information:
   const [bookedTicketUsingUserInformation, setBookedTicketUsingUserInformation] = useState({});
   const handleData = (e) => {
@@ -100,8 +103,8 @@ const BookTicket = () => {
     console.log(data);
 
     setBookedTicketUsingUserInformation(data);
-    const findBus = allBus?.find((bus) => bus?.busType == busType && bus?.to == to && busType && bus?.date == date);
-
+    const url = `http://localhost:5000/getSeat/${data?.from}&&${data?.to}&&${data?.date}&&${data?.busType}&&${data?.schedule}`;
+    setLoadSeat(true)
     // Make the GET request
     fetch(url, {
       method: 'GET',
@@ -114,9 +117,7 @@ const BookTicket = () => {
         setBookedSeat(data);
         if (data) {
           setDisplaySelectSeat(true)
-        }
-        else {
-          return 'loading'
+          setLoadSeat(false)
         }
       })
       .catch(error => {
@@ -307,7 +308,7 @@ const BookTicket = () => {
                                 Select District:
                               </p>
                               <div className="input-group">
-                                <select name="from" className="select select-bordered border-orange-400 input-info rounded-md w-full mb-2" id="districtSelect">
+                                <select onChange={(e) => setFromDistrict(e.target.value)} name="from" className="select select-bordered border-orange-400 input-info rounded-md w-full mb-2" id="districtSelect">
                                   {districtData[selectedDivision].map((district) => (
                                     <option key={district} value={district}>
                                       {district}
@@ -342,7 +343,7 @@ const BookTicket = () => {
                               </p>
                               <div className="input-group">
                                 <select name="to" className="select select-bordered border-orange-400 input-info rounded-md w-full mb-2" id="districtSelect">
-                                  {districtData[selectedDivisionTo].map((district) => (
+                                  {districtData[selectedDivisionTo]?.filter(d => d != fromDistrict).map((district) => (
                                     <option key={district} value={district}>
                                       {district}
                                     </option>
@@ -380,10 +381,10 @@ const BookTicket = () => {
                               <option disabled selected>
                                 select schedule
                               </option>
-                              <option>7:00 AM</option>
-                              <option>8:00 AM</option>
-                              <option>7:00 PM</option>
-                              <option>8:00 PM</option>
+                              <option value="7:00 AM">7:00 AM</option>
+                              <option value="8:00 AM">8:00 AM</option>
+                              <option value="7:00 PM">7:00 PM</option>
+                              <option value="8:00 PM">8:00 PM</option>
                             </select>
                           </div>
                         </div>
@@ -400,93 +401,100 @@ const BookTicket = () => {
                     </div>
                   </div>
                   {/* Seat Selection Part */}
-                  <div className="bg-orange-50 py-10 flex justify-center items-center rounded-lg">
-                    <div>
-                      <h1 className="text-3xl font-extrabold brand-color text-center pb-8">Select Your Seat</h1>
-                      <div className="flex justify-center items-center">
-                        <div
-                          style={{
-                            height: "15px",
-                            width: "15px",
-                            backgroundColor: "red",
-                          }}
-                        ></div>
-                        <h4 className="ms-4">Already Booked</h4>
-                      </div>
-                      <div className="flex justify-center items-center">
-                        <div
-                          style={{
-                            height: "15px",
-                            width: "15px",
-                            backgroundColor: "rgb(252, 233, 85)",
-                          }}
-                        ></div>
-                        <h4 className="ms-4">Available</h4>
-                      </div>
-                      {
-                        <div className="grid grid-cols-2 mx-auto gap-x-14 mt-12">
-                          {displaySelectSeat && (
-                            <>
-                              <div className="grid grid-cols-2">
-                                {halfSeats1?.map((seat) => (
-                                  <button
-                                    onClick={() => handleSeatSelect(seat)}
-                                    className="btn m-2"
-                                    style={{
-                                      background:
-                                        selectedSeats.includes(seat) ||
-                                          bookedSeat?.includes(seat)
-                                          ? "orangered"
-                                          : "rgb(252, 233, 85)",
-                                    }}
-                                    disabled={
-                                      bookedSeat?.includes(seat) ? true : false
-                                    }
-                                    key={seat}
-                                  >
-                                    {seat}
-                                  </button>
-                                ))}
-                              </div>
-                              <div className="grid grid-cols-2 ">
-                                {halfSeats2?.map((seat) => (
-                                  <button
-                                    onClick={() => handleSeatSelect(seat)}
-                                    className="btn mt-2 ms-2"
-                                    style={{
-                                      background:
-                                        selectedSeats.includes(seat) ||
-                                          bookedSeat?.includes(seat)
-                                          ? "orangered"
-                                          : "rgb(252, 233, 85)",
-                                    }}
-                                    disabled={
-                                      bookedSeat?.includes(seat) ? true : false
-                                    }
-                                    key={seat}
-                                  >
-                                    {seat}
-                                  </button>
-                                ))}
-                              </div>
-                            </>
-                          )}
-                          <div></div>
+                  {loadSeat == true ? <div className="h-screen w-full flex justify-center items-center">
+                    <span className="loading loading-spinner loading-lg"></span>
+                  </div> :
+                    <div className="bg-orange-50 py-10 flex justify-center items-center rounded-lg">
+                      <div>
+                        <h1 className="text-3xl font-extrabold brand-color text-center pb-8">
+                          Select Your Seat
+                        </h1>
+                        <div className="flex justify-center items-center">
+                          <div
+                            style={{
+                              height: "15px",
+                              width: "15px",
+                              backgroundColor: "red",
+                            }}
+                          ></div>
+                          <h4 className="ms-4">Already Booked</h4>
                         </div>
-                      }
+                        <div className="flex justify-center items-center">
+                          <div
+                            style={{
+                              height: "15px",
+                              width: "15px",
+                              backgroundColor: "rgb(252, 233, 85)",
+                            }}
+                          ></div>
+                          <h4 className="ms-4">Available</h4>
+                        </div>
+                        {
+                          <div className="grid grid-cols-2 mx-auto gap-x-14 mt-12">
+                            {displaySelectSeat && (
+                              <>
+                                <div className="grid grid-cols-2">
+                                  {halfSeats1?.map((seat) => (
+                                    <button
+                                      onClick={() => handleSeatSelect(seat)}
+                                      className="btn m-2"
+                                      style={{
+                                        background:
+                                          selectedSeats.includes(seat) ||
+                                            bookedSeat?.includes(seat)
+                                            ? "orangered"
+                                            : "rgb(252, 233, 85)",
+                                      }}
+                                      disabled={
+                                        bookedSeat?.includes(seat) ? true : false
+                                      }
+                                      key={seat}
+                                    >
+                                      {seat}
+                                    </button>
+                                  ))}
+                                </div>
+                                <div className="grid grid-cols-2 ">
+                                  {halfSeats2?.map((seat) => (
+                                    <button
+                                      onClick={() => handleSeatSelect(seat)}
+                                      className="btn mt-2 ms-2"
+                                      style={{
+                                        background:
+                                          selectedSeats.includes(seat) ||
+                                            bookedSeat?.includes(seat)
+                                            ? "orangered"
+                                            : "rgb(252, 233, 85)",
+                                      }}
+                                      disabled={
+                                        bookedSeat?.includes(seat) ? true : false
+                                      }
+                                      key={seat}
+                                    >
+                                      {seat}
+                                    </button>
+                                  ))}
+                                </div>
+                              </>
+                            )}
+                            <div></div>
+                          </div>
+                        }
 
-                      <div className="flex justify-center mt-4">
-                        {counter > 0 && (
-                          <button
-                            className="btn btn-block brand-btn"
-                            onClick={() => document.getElementById("my_modal_4").showModal()}
-                          >
-                            Book Ticket
-                          </button>
-                        )}
+                        <div className="flex justify-center mt-4">
+                          {counter > 0 && (
+                            <button
+                              className="btn btn-block brand-btn"
+                              onClick={() =>
+                                document.getElementById("my_modal_4").showModal()
+                              }
+                            >
+                              Book Ticket
+                            </button>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  </div>
+                    </div>}
                 </div>
               </div>
             </div>
@@ -550,5 +558,5 @@ const BookTicket = () => {
     </>
   );
 };
-
+// Happy Birthday
 export default BookTicket;

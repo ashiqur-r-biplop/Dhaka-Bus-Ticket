@@ -6,8 +6,8 @@ import BTicket from "../../../Pages/Main/BookTicket/BTicket";
 const BookTicketComponent = () => {
   return (
     <div className="grid mx-auto max-width-[1200px]">
-      {/* <BookTicket></BookTicket> */}
-      <BTicket></BTicket>
+      <BookTicket></BookTicket>
+      {/* <BTicket></BTicket> */}
     </div>
   );
 };
