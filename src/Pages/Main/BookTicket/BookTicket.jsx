@@ -159,17 +159,6 @@ const BookTicket = () => {
       .catch(error => {
         console.error('Error:', error);
       });
-    // const findBus = allBus?.find(
-    //   (bus) =>
-    //     bus?.busType == busType && bus?.to == to && busType && bus?.date == date
-    // );
-
-    // setBookedSeat(findBus?.bookedSeat);
-    // findBus && setDisplaySelectSeat(true);
-    // setSearchBus(findBus);
-    // setSelectedSeats([]);
-    // setControl(!control);
-    // Simulate loading for 1 second (1000 milliseconds)
   };
 
   // *****************Card Information**********************
