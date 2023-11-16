@@ -33,7 +33,7 @@ const ContactForm = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        // console.log(result);
+        console.log(result);
         event.target.reset();
         if (result.acknowledged === true) {
           Swal.fire("Good job!", "Your Message SuccessFully", "success");

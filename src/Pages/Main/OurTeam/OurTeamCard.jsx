@@ -29,17 +29,17 @@ const OurTeamCard = ({
             <p className="text-base">{description}</p>
             <div className="flex absolute -bottom-20 delay-500 duration-1000 group-hover:bottom-20 scale-0 group-hover:scale-125 justify-center items-center mt-5 gap-5">
               {facebookLink && (
-                <Link to={facebookLink}>
+                <Link to={facebookLink} target="_blank">
                   <BsFacebook title="Facebook" size={35} />
                 </Link>
               )}
               {githubLink && (
-                <Link to={githubLink}>
+                <Link target="_blank" to={githubLink}>
                   <BsGithub title="GitHub" size={35} />
                 </Link>
               )}
               {linkedinLink && (
-                <Link to={linkedinLink}>
+                <Link target="_blank" to={linkedinLink}>
                   <BsLinkedin title="Linkedin" size={35} />
                 </Link>
               )}
