@@ -17,7 +17,7 @@ const Count = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     axios
-      .get("https://dhaka-bus-ticket-server-two.vercel.app/subscriberCount")
+      .get("http://localhost:5001/subscriberCount")
       .then((res) => {
         setSubscriberCount(res?.data?.count);
         setLoading(false);

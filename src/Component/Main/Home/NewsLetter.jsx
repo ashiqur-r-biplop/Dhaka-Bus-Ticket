@@ -13,7 +13,7 @@ const NewsLetter = () => {
   };
   const handelSubmit = () => {
     axios
-      .post("https://dhaka-bus-ticket-server-two.vercel.app/subscriber", { email })
+      .post("http://localhost:5001/subscriber", { email })
       .then((res) => {
         if (res.data.acknowledged === true) {
           Swal.fire(

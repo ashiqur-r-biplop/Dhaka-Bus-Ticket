@@ -14,7 +14,7 @@ const Testimonial = () => {
   const [slides, setSlides] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    fetch("https://dhaka-bus-ticket-server-two.vercel.app/all-feedback")
+    fetch("http://localhost:5001/all-feedback")
       .then((res) => res.json())
       .then((data) => {
         setSlides(data?.result);

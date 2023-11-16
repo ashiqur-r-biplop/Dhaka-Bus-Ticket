@@ -6,7 +6,7 @@ const AllUsers = () => {
   const [filteredUsers, setFilteredUsers] = useState([]);
 
   useEffect(() => {
-    fetch("https://dhaka-bus-ticket-server-two.vercel.app/users")
+    fetch("http://localhost:5001/users")
       .then((res) => res.json())
       .then((data) => {
         setUsers(data);
@@ -54,31 +54,31 @@ const AllUsers = () => {
 
           {/* table */}
           <div className="md:hidden">
-        <table className="table  table-sm">
+            <table className="table  table-sm">
 
-          <tbody className="item-center">
-            {filteredUsers.map((user, index) => (
-              <tr
-                key={index}
-                className={
-                  index % 2 === 0 ? "text-orange-800 bg-slate-300 flex flex-col" : "text-black bg-red-300 flex flex-col"
-                }
-              >
-                <td className="sm:text-xl flex"><span className='text-white font-bold w-[30%] bg-orange-600 flex items-center justify-center -my-2 me-3'>Name: </span>{user.name}</td>
-                <hr className="font-bold" />
-                <td className="sm:text-xl flex"><span className='text-white font-bold w-[30%] bg-orange-600 flex items-center justify-center -my-2 me-3'>Email: </span>{user.email}</td>
-                <hr className="font-bold" />
-                <td className="sm:text-xl flex"><span className='text-white font-bold w-[30%] bg-orange-600 flex items-center justify-center -my-2 me-3'>Phone: </span>{user.phone}</td>
-                <hr className="font-bold" />
-                <td className="sm:text-xl flex"><span className='text-white font-bold w-[30%] bg-orange-600 flex items-center justify-center -my-2 me-3'>Role: </span>{user.role}</td>
-                <hr className="font-bold" />
-                <td className="sm:text-xl flex"><span className='text-white font-bold w-[30%] bg-orange-600 flex items-center justify-center -my-2 me-3'>Action: </span>Delete</td>
-                <hr className="font-bold border-2 border-white" />
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+              <tbody className="item-center">
+                {filteredUsers.map((user, index) => (
+                  <tr
+                    key={index}
+                    className={
+                      index % 2 === 0 ? "text-orange-800 bg-slate-300 flex flex-col" : "text-black bg-red-300 flex flex-col"
+                    }
+                  >
+                    <td className="sm:text-xl flex"><span className='text-white font-bold w-[30%] bg-orange-600 flex items-center justify-center -my-2 me-3'>Name: </span>{user.name}</td>
+                    <hr className="font-bold" />
+                    <td className="sm:text-xl flex"><span className='text-white font-bold w-[30%] bg-orange-600 flex items-center justify-center -my-2 me-3'>Email: </span>{user.email}</td>
+                    <hr className="font-bold" />
+                    <td className="sm:text-xl flex"><span className='text-white font-bold w-[30%] bg-orange-600 flex items-center justify-center -my-2 me-3'>Phone: </span>{user.phone}</td>
+                    <hr className="font-bold" />
+                    <td className="sm:text-xl flex"><span className='text-white font-bold w-[30%] bg-orange-600 flex items-center justify-center -my-2 me-3'>Role: </span>{user.role}</td>
+                    <hr className="font-bold" />
+                    <td className="sm:text-xl flex"><span className='text-white font-bold w-[30%] bg-orange-600 flex items-center justify-center -my-2 me-3'>Action: </span>Delete</td>
+                    <hr className="font-bold border-2 border-white" />
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
 
           <div className="hidden md:block">

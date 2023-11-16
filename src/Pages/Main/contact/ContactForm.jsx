@@ -26,7 +26,7 @@ const ContactForm = () => {
     event.preventDefault();
 
     console.log("Form Data:", formData);
-    fetch("https://dhaka-bus-ticket-server-two.vercel.app/contact-form", {
+    fetch("http://localhost:5001/contact-form", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(formData),
