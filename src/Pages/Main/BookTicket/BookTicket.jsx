@@ -152,7 +152,7 @@ const BookTicket = () => {
         .replace(/\//g, "-");
       console.log(bookedTicketUsingUserInformation);
 
-      fetch("http://localhost:5001/book-ticket", {
+      fetch("http://localhost:5000/book-ticket", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(bookedTicketUsingUserInformation),

@@ -26,7 +26,7 @@ const ContactForm = () => {
     event.preventDefault();
 
     console.log("Form Data:", formData);
-    fetch("http://localhost:5001/contact-form", {
+    fetch("http://localhost:5000/contact-form", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(formData),

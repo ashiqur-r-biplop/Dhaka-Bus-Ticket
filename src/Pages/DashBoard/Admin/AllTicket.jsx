@@ -5,7 +5,7 @@ const AllTicket = () => {
   const [allTicket, setAllTicket] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:5001/all-ticket')
+    fetch('http://localhost:5000/all-ticket')
       .then(res => res.json())
       .then(data => {
         setUsers(data);

@@ -19,7 +19,7 @@ const UserProfile = () => {
     try {
       if (userEmail) {
         const response = await fetch(
-          `http://localhost:5001/single-user?email=${userEmail}`
+          `http://localhost:5000/single-user?email=${userEmail}`
         );
         if (!response.ok) {
           throw new Error("failed to fetch");
@@ -58,7 +58,7 @@ const UserProfile = () => {
     const url = ""
     try {
       axios
-        .patch(`http://localhost:5001/single-user/${currentUser._id}`, userInfo)
+        .patch(`http://localhost:5000/single-user/${currentUser._id}`, userInfo)
         .then((res) => {
           console.log(res.data);
 

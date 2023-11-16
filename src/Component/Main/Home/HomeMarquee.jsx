@@ -9,7 +9,7 @@ const HomeMarquee = () => {
   const { NoticeControl } = useContext(AuthContext);
   useEffect(() => {
     axios
-      .get("http://localhost:5001/notices")
+      .get("http://localhost:5000/notices")
       .then((res) => {
         setNotices(res.data);
         setLoading(false);

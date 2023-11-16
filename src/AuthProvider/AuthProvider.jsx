@@ -80,7 +80,7 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         // console.log("data");
         axios
-          .post("http://localhost:5001/jwt", {
+          .post("http://localhost:5000/jwt", {
             email: currentUser.email,
           })
           .then((data) => {
