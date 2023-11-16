@@ -4,7 +4,8 @@ import "animate.css/animate.min.css";
 import ScrollAnimation from "react-animate-on-scroll";
 import axios from "axios";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
-import SubscriberCount from "../../../Hook/SubscriberCount";
+import { useContext, useEffect, useState } from "react";
+// import SubscriberCount from "../../../Hook/SubscriberCount";
 
 const Count = () => {
   // const { subscriberCount } = SubscriberCount();
