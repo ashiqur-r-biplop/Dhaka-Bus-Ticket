@@ -60,7 +60,7 @@ const Register = () => {
               role: userData.role,
             };
 
-            fetch(`http://localhost:5001/users`, {
+            fetch(`http://localhost:5000/users`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -125,7 +125,7 @@ const Register = () => {
           role: "user",
         };
 
-        fetch(`http://localhost:5001/users`, {
+        fetch(`http://localhost:5000/users`, {
           method: "POST",
           headers: {
             "content-type": "application/json",

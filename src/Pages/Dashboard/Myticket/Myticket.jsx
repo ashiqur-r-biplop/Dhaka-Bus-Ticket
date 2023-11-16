@@ -9,7 +9,7 @@ const Myticket = () => {
   const [loading, setLoading] = useState(false);
   console.log(user.email);
   useEffect(() => {
-    fetch(`http://localhost:5001/my-ticket/${user?.email}`)
+    fetch(`http://localhost:5000/my-ticket/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setTickets(data);

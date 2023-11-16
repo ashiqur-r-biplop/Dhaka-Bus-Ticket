@@ -17,7 +17,7 @@ const Count = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     axios
-      .get("http://localhost:5001/subscriberCount")
+      .get("http://localhost:5000/subscriberCount")
       .then((res) => {
         setSubscriberCount(res?.data?.count);
         setLoading(false);

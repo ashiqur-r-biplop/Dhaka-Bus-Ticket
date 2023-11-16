@@ -13,7 +13,7 @@ const NewsLetter = () => {
   };
   const handelSubmit = () => {
     axios
-      .post("http://localhost:5001/subscriber", { email })
+      .post("http://localhost:5000/subscriber", { email })
       .then((res) => {
         if (res.data.acknowledged === true) {
           Swal.fire(
