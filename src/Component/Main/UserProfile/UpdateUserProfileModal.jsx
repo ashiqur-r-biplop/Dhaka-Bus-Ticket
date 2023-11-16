@@ -7,10 +7,27 @@ const UpdateUserProfileModal = ({currentUser,}) => {
     
   console.log(currentUser);
   const { register, handleSubmit,  } = useForm();
-  const onSubmit = data =>{ 
+  const onSubmit = async (data) =>{ 
      console.log(data)
-
-      
+     const response = await fetch(`http://localhost:5000/single-user/${currentUser._id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+    
+        if (response.ok) {
+          const result = await response.json();
+          console.log(result);
+          // Handle the result or perform any necessary actions
+    
+          // Close the modal or perform other actions
+          document.getElementById("my_modal_1").close();
+        } else {
+          console.error('Error updating user:', response.status, response.statusText);
+          // Handle the error or show an error message
+        }
 
 
 
