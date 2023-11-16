@@ -60,7 +60,7 @@ const Register = () => {
               role: userData.role,
             };
 
-            fetch(`https://dhaka-bus-ticket-server-two.vercel.app/users`, {
+            fetch(`http://localhost:5001/users`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -125,7 +125,7 @@ const Register = () => {
           role: "user",
         };
 
-        fetch(`https://dhaka-bus-ticket-server-two.vercel.app/users`, {
+        fetch(`http://localhost:5001/users`, {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -167,9 +167,8 @@ const Register = () => {
               <input
                 type="text"
                 name="name"
-                className={`bg-white rounded p-2 border focus:outline-none focus:border-orange-500 ${
-                  errors.name && "border-red-500"
-                }`}
+                className={`bg-white rounded p-2 border focus:outline-none focus:border-orange-500 ${errors.name && "border-red-500"
+                  }`}
                 {...register("name", { required: "Your Name is required" })}
                 placeholder="Your Name"
               />
@@ -180,9 +179,8 @@ const Register = () => {
               <input
                 type="email"
                 name="email"
-                className={`bg-white rounded p-2 border focus:outline-none focus:border-orange-500 ${
-                  errors.email && "border-red-500"
-                }`}
+                className={`bg-white rounded p-2 border focus:outline-none focus:border-orange-500 ${errors.email && "border-red-500"
+                  }`}
                 {...register("email", { required: "Email is required" })}
                 placeholder="Email or Username"
               />
@@ -193,9 +191,8 @@ const Register = () => {
               <input
                 type="password"
                 name="loginPassword"
-                className={`bg-white rounded p-2 border focus:outline-none focus:border-orange-500 ${
-                  errors.loginPassword && "border-red-500"
-                }`}
+                className={`bg-white rounded p-2 border focus:outline-none focus:border-orange-500 ${errors.loginPassword && "border-red-500"
+                  }`}
                 {...register("loginPassword", {
                   required: "Password is required",
                 })}
@@ -207,9 +204,8 @@ const Register = () => {
               <input
                 type="password"
                 name="confirmPassword"
-                className={`bg-white rounded p-2 border focus:outline-none focus:border-orange-500 ${
-                  errors.confirmPassword && "border-red-500"
-                }`}
+                className={`bg-white rounded p-2 border focus:outline-none focus:border-orange-500 ${errors.confirmPassword && "border-red-500"
+                  }`}
                 {...register("confirmPassword", {
                   required: "Confirm Password is required",
                   validate: (value) => value === password || "Passwords do not match",
@@ -235,9 +231,8 @@ const Register = () => {
               <input
                 type="tel"
                 name="phoneNumber"
-                className={`bg-white rounded p-2 border focus:outline-none focus:border-orange-500 ${
-                  errors.phoneNumber && "border-red-500"
-                }`}
+                className={`bg-white rounded p-2 border focus:outline-none focus:border-orange-500 ${errors.phoneNumber && "border-red-500"
+                  }`}
                 {...register("phoneNumber", {
                   required: "Phone Number is required",
                 })}
@@ -264,11 +259,9 @@ const Register = () => {
             <div>
               <button
                 type="submit"
-                className={`${
-                  isAgreed && password === confirmPassword ? "bg-blue-600 text-white" : "bg-gray-400"
-                } text-black p-2 rounded focus:outline-none focus:border-orange-500 transition duration-300 ease-in-out w-full  ${
-                  !(isAgreed && password === confirmPassword) && "cursor-not-allowed"
-                }`}
+                className={`${isAgreed && password === confirmPassword ? "bg-blue-600 text-white" : "bg-gray-400"
+                  } text-black p-2 rounded focus:outline-none focus:border-orange-500 transition duration-300 ease-in-out w-full  ${!(isAgreed && password === confirmPassword) && "cursor-not-allowed"
+                  }`}
                 disabled={!isAgreed || password !== confirmPassword}
               >
                 Create Account

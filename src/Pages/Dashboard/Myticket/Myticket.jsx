@@ -9,7 +9,7 @@ const Myticket = () => {
   const [loading, setLoading] = useState(false);
   console.log(user.email);
   useEffect(() => {
-    fetch(`https://dhaka-bus-ticket-server-two.vercel.app/my-ticket/${user?.email}`)
+    fetch(`http://localhost:5001/my-ticket/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setTickets(data);
@@ -43,21 +43,21 @@ const Myticket = () => {
   return (
     <div className="w-full  my-5 ">
 
-{/* ******************* serach ************** */}
-<div className="">
-            <button className="brand-btn btn-block p-2  transition duration-75">
-              Search Here:{" "}
-              <input
-                type="text"
-                className="p-1 ps-2 rounded-full text-black "
-                placeholder="Search"
-                id="search"
-                onChange={handleChange}
-              />
-            </button>
-          </div>
+      {/* ******************* serach ************** */}
+      <div className="">
+        <button className="brand-btn btn-block p-2  transition duration-75">
+          Search Here:{" "}
+          <input
+            type="text"
+            className="p-1 ps-2 rounded-full text-black "
+            placeholder="Search"
+            id="search"
+            onChange={handleChange}
+          />
+        </button>
+      </div>
 
-          {/* *********************search ************** */}
+      {/* *********************search ************** */}
 
 
       <div className="">
@@ -72,7 +72,7 @@ const Myticket = () => {
           />
         </button>
       </div>
-      
+
       {/* search options ends here */}
       <div className="md:hidden">
         <table className="table w-full  flex table-sm">

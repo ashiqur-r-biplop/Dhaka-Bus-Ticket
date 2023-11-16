@@ -7,7 +7,6 @@ import payment from "../../../assets/payment.png";
 import { useNavigate } from "react-router";
 
 const BookTicket = () => {
-  // Dev-Akash
   const navigate = useNavigate();
   const loadUser = useContext(AuthContext);
   const { user } = loadUser;
@@ -153,7 +152,7 @@ const BookTicket = () => {
         .replace(/\//g, "-");
       console.log(bookedTicketUsingUserInformation);
 
-      fetch("http://localhost:5000/book-ticket", {
+      fetch("http://localhost:5001/book-ticket", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(bookedTicketUsingUserInformation),

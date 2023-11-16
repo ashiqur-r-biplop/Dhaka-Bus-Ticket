@@ -19,7 +19,7 @@ const UserProfile = () => {
     try {
       if (userEmail) {
         const response = await fetch(
-          `https://dhaka-bus-ticket-server-two.vercel.app/single-user?email=${userEmail}`
+          `http://localhost:5001/single-user?email=${userEmail}`
         );
         if (!response.ok) {
           throw new Error("failed to fetch");
@@ -34,8 +34,8 @@ const UserProfile = () => {
   };
   console.log(userEmail);
   useEffect(() => {
-     fetchData();
-   }, [userEmail, control]);
+    fetchData();
+  }, [userEmail, control]);
 
   console.log(currentUser, "35");
 
@@ -58,7 +58,7 @@ const UserProfile = () => {
     const url = ""
     try {
       axios
-        .patch(`https://dhaka-bus-ticket-server-two.vercel.app/single-user/${currentUser._id}`, userInfo)
+        .patch(`http://localhost:5001/single-user/${currentUser._id}`, userInfo)
         .then((res) => {
           console.log(res.data);
 
@@ -121,9 +121,9 @@ const UserProfile = () => {
               Update Profile
             </button>
           </div>
-           
+
         </div>
-          <div className="shadow-lg rounded-md bg-slate-50">
+        <div className="shadow-lg rounded-md bg-slate-50">
           <div className=" p-2">
             <p className="text-center rounded-md py-2 bg-white text-orange-600">
               My Billings
@@ -135,7 +135,7 @@ const UserProfile = () => {
                   <tr className="text-xl md:text-2xl text-white bg-[#FF4500]">
                     <th>Email </th>
                     <th className="">TransId</th>
-                   
+
                   </tr>
                 </thead>
                 <tbody className="item-center">
@@ -163,14 +163,14 @@ const UserProfile = () => {
           </div>
         </div>
 
-       {/* some change of note */}
-       
+        {/* some change of note */}
 
-        
+
+
       </div>
       <UpdateUserProfileModal
         currentUser={currentUser}
-         
+
       ></UpdateUserProfileModal>
     </>
   );

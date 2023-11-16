@@ -13,7 +13,8 @@ const Login = () => {
     reset,
   } = useForm();
 
-  const { signIn, user, createUserWithGoogle, loading, setLoading } = useContext(AuthContext);
+  const { signIn, user, createUserWithGoogle, setReload, loading, setLoading } =
+    useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -28,6 +29,7 @@ const Login = () => {
           timer: 3000,
         });
         setLoading(false);
+        setReload(false);
         navigate(from, { replace: true });
         reset();
       })
@@ -53,7 +55,7 @@ const Login = () => {
           photo: loggedInUser.photoURL,
         };
 
-        fetch(`https://dhaka-bus-ticket-server-two.vercel.app/users`, {
+        fetch(`http://localhost:5001/users`, {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -96,9 +98,8 @@ const Login = () => {
               <input
                 type="email"
                 name="email"
-                className={`bg-white rounded p-2 border focus:outline-none focus:border-orange-500 ${
-                  errors.email && "border-red-500"
-                }`}
+                className={`bg-white rounded p-2 border focus:outline-none focus:border-orange-500 ${errors.email && "border-red-500"
+                  }`}
                 {...register("email", { required: "Email is required" })}
                 placeholder="Email or Username"
               />
@@ -108,9 +109,8 @@ const Login = () => {
               <input
                 type="password"
                 name="loginPassword"
-                className={`bg-white rounded p-2 border focus:outline-none focus:border-orange-500 ${
-                  errors.loginPassword && "border-red-500"
-                }`}
+                className={`bg-white rounded p-2 border focus:outline-none focus:border-orange-500 ${errors.loginPassword && "border-red-500"
+                  }`}
                 {...register("loginPassword", {
                   required: "Password is required",
                 })}
