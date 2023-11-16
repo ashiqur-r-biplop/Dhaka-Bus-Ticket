@@ -34,7 +34,7 @@ const UpdateUserProfileModal = ({currentUser,}) => {
               className="input input-bordered  w-full mb-2"
             />
           </div>
-          <div>
+          {/* <div>
             <p className="text-lg">Email:</p>
             <input
               {...register("email")}
@@ -42,12 +42,12 @@ const UpdateUserProfileModal = ({currentUser,}) => {
               name="email" // Corrected the name attribute
               className="input input-bordered  w-full mb-2"
             />
-          </div>
+          </div> */}
           <div>
             <p className="text-lg">Phone:</p>
             <input
               {...register("number")}
-              type="number"
+              type="text"
               name="number" // Corrected the name attribute
               className="input input-bordered  w-full mb-2"
             />
