@@ -13,7 +13,7 @@ const Login = () => {
     reset,
   } = useForm();
 
-  const { signIn, user, createUserWithGoogle, loading, setLoading } =
+  const { signIn, user, createUserWithGoogle,setReload, loading, setLoading } =
     useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
