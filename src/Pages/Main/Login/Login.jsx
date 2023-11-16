@@ -10,10 +10,10 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
   } = useForm();
 
-  const { signIn, user, createUserWithGoogle, loading, setLoading } =
+  const { signIn, user, createUserWithGoogle, setReload, loading, setLoading } =
     useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
@@ -29,6 +29,7 @@ const Login = () => {
           timer: 3000,
         });
         setLoading(false);
+        setReload(false);
         navigate(from, { replace: true });
         reset();
       })
@@ -81,19 +82,14 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col md:flex-row lg:pt-16">
+    <div className="bg-orange-50 min-h-screen flex flex-col md:flex-row lg:pt-16">
       <div
         className="md:w-1/2 h-64 md:h-screen bg-cover bg-center relative"
         style={{
           backgroundImage: `url('https://img.freepik.com/free-vector/autonomous-public-transport-abstract-concept-vector-illustration-self-driving-bus-urban-transport-services-smart-taxi-automatic-road-service-public-bus-city-train-traffic-abstract-metaphor_335657-1771.jpg?size=626&ext=jpg')`,
         }}
-      >
-        <div className="absolute inset-0 bg-blue-700 opacity-70"></div>
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
-          <h1 className="text-4xl font-bold text-center mb-4 text-orange-500">Welcome to Our Service</h1>
-          <p className="text-lg text-center">Discover the best transportation experience with us.</p>
-        </div>
-      </div>
+      ></div>
+
       <div className="md:w-1/2 p-4 md:p-6 flex items-center justify-center">
         <div className="max-w-md w-full">
           <h1 className="text-3xl font-bold text-center mb-6">Login</h1>
@@ -107,9 +103,7 @@ const Login = () => {
                 {...register("email", { required: "Email is required" })}
                 placeholder="Email or Username"
               />
-              {errors.email && (
-                <span className="text-red-500">{errors.email.message}</span>
-              )}
+              {errors.email && <span className="text-red-500">{errors.email.message}</span>}
             </div>
             <div className="flex flex-col">
               <input
@@ -122,11 +116,7 @@ const Login = () => {
                 })}
                 placeholder="Password"
               />
-              {errors.loginPassword && (
-                <span className="text-red-500">
-                  {errors.loginPassword.message}
-                </span>
-              )}
+              {errors.loginPassword && <span className="text-red-500">{errors.loginPassword.message}</span>}
             </div>
             <div>
               <button

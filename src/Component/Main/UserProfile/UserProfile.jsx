@@ -12,8 +12,6 @@ const UserProfile = () => {
   console.log(user);
   const userEmail = user?.email;
   const photoURL = user?.photoURL;
-  // console.log(userEmail);
-
   const [control, setControl] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
 
@@ -27,7 +25,7 @@ const UserProfile = () => {
           throw new Error("failed to fetch");
         }
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         setCurrentUser(data);
       }
     } catch (error) {
@@ -117,26 +115,62 @@ const UserProfile = () => {
 
             <button
               className="flex items-center justify-center w-full p-3 font-semibold  rounded-md bg-orange-600 text-gray-50"
-              onClick={() => document.getElementById("my_modal_3").showModal()}
+              onClick={() => handleViewClick()}
             >
               {" "}
               Update Profile
             </button>
           </div>
-        </div>
 
+        </div>
         <div className="shadow-lg rounded-md bg-slate-50">
           <div className=" p-2">
             <p className="text-center rounded-md py-2 bg-white text-orange-600">
               My Billings
             </p>
-            <div>{/* maping kore info show korty pari */}</div>
+            <div>
+              <table className="table w-full md:w-full my-2">
+                {/* head */}
+                <thead>
+                  <tr className="text-xl md:text-2xl text-white bg-[#FF4500]">
+                    <th>Email </th>
+                    <th className="">TransId</th>
+
+                  </tr>
+                </thead>
+                <tbody className="item-center">
+                  {bills?.map((user, index) => (
+                    <tr
+                      key={index}
+                      className={
+                        index % 2 === 0
+                          ? "text-green-700 bg-green-100 border-b-2 border-green-300"
+                          : "text-orange-700 bg-yellow-100 border-b-2 border-yellow-500"
+                      }
+                    >
+                      {/* <td className="md:flex md:items-center md:gap-2">
+                        <span className="font-bold md:text-sm">
+                          {}
+                        </span>
+                      </td> */}
+                      <td className="font-semibold">{user.customerEmail}</td>
+                      <td className="font-semibold">{user.transitionId}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
+
+        {/* some change of note */}
+
+
+
       </div>
       <UpdateUserProfileModal
         currentUser={currentUser}
-        handleFormSubmit={handleFormSubmit}
+
       ></UpdateUserProfileModal>
     </>
   );

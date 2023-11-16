@@ -54,7 +54,7 @@ const OurTeam = () => {
 
             <OurTeamCard
               imageSrc={masud}
-              name="Masud Bhuiyan"
+              name="Masud Bhuiyan "
               details={"FULL STACK DEVELOPER"}
               description={"I love Programming "}
               facebookLink="https://www.facebook.com/masudbhuiyan1415/"

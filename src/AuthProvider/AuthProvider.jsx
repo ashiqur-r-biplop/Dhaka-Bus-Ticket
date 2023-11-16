@@ -14,6 +14,7 @@ import {
 
 import app from "../Firebase/firebase.config";
 import axios from "axios";
+import SubscriberCount from "../Hook/SubscriberCount";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
@@ -23,6 +24,7 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [NoticeControl, setNoticeControl] = useState(false);
   const [reload, setReload] = useState(true);
+  const [subscribeControl, setSubscribeControl] = useState(true);
 
   // Google provider
   const googleProvider = new GoogleAuthProvider();
@@ -111,6 +113,8 @@ const AuthProvider = ({ children }) => {
     setReload,
     loading,
     setLoading,
+    subscribeControl,
+    setSubscribeControl,
   };
 
   return (

@@ -13,63 +13,46 @@ const BookTicket = () => {
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [bookedSeat, setBookedSeat] = useState([]);
   const [displaySelectSeat, setDisplaySelectSeat] = useState(false);
-  const [searchBus, setSearchBus] = useState(null);
-  // console.log(selectedSeats)
-  // console.log(user);
+  console.log(selectedSeats)
+
+  // *****************All District Information and functionality:
+  const [selectedDivision, setSelectedDivision] = useState('Dhaka');
+  const [selectedDivisionTo, setSelectedDivisionTo] = useState('Dhaka');
+  const [fromDistrict, setFromDistrict] = useState('Dhaka');
+  const districtData = {
+    Dhaka: ["Dhaka", "Gazipur", "Tangail", "Munshiganj", "Narayanganj"],
+    Chattogram: ["Chattogram", "Cox's Bazar", "Comilla", "Feni", "Noakhali"],
+    Rajshahi: ["Rajshahi", "Bogra", "Pabna", "Naogaon", "Sirajganj"],
+    Khulna: ["Khulna", "Jessore", "Satkhira", "Bagerhat", "Magura"],
+    Barisal: ["Barisal", "Bhola", "Patuakhali", "Pirojpur", "Jhalokathi"],
+    Sylhet: ["Sylhet", "Moulvibazar", "Habiganj", "Sunamganj"],
+    Rangpur: ["Rangpur", "Dinajpur", "Kurigram", "Lalmonirhat", "Thakurgaon"],
+    Mymensingh: ["Mymensingh", "Jamalpur", "Netrokona", "Sherpur"]
+  };
+  const handleDivisionChangeFrom = (event) => {
+    setSelectedDivision(event?.target?.value);
+  };
+  const handleDivisionChangeTo = (event) => {
+    setSelectedDivisionTo(event.target.value);
+  };
 
   // ****************Date Handle****************************
   const currentDate = new Date();
-  const maxDate = new Date();
-  maxDate.setDate(currentDate.getDate() + 2);
+
+  // Set the time zone to Bangladesh Standard Time (BST)
+  const options = { timeZone: 'Asia/Dhaka' };
+  const currentDateInBangladesh = new Date(currentDate.toLocaleString('en-US', options));
+
+  // Set the max date to 6 days ahead
+  const maxDate = new Date(currentDateInBangladesh);
+  maxDate.setDate(currentDateInBangladesh.getDate() + 6);
+
 
   // Load All Bus:
-  const [allBus, setAllBus] = useState([]);
   const [control, setControl] = useState(false);
-  useEffect(() => {
-    fetch("http://localhost:5000/all-bus")
-      .then((res) => res.json())
-      .then((data) => {
-        setAllBus(data);
-        // console.log(data);
-      });
-  }, [control, bookedSeat, displaySelectSeat]);
 
-  const halfSeats1 = [
-    "H4",
-    "H3",
-    "G4",
-    "G3",
-    "F4",
-    "F3",
-    "E4",
-    "E3",
-    "D4",
-    "D3",
-    "C4",
-    "C3",
-    "B4",
-    "B3",
-    "A4",
-    "A3",
-  ];
-  const halfSeats2 = [
-    "H2",
-    "H1",
-    "G2",
-    "G1",
-    "F2",
-    "F1",
-    "E2",
-    "E1",
-    "D2",
-    "D1",
-    "C2",
-    "C1",
-    "B2",
-    "B1",
-    "A2",
-    "A1",
-  ];
+  const halfSeats1 = ["H4", "H3", "G4", "G3", "F4", "F3", "E4", "E3", "D4", "D3", "C4", "C3", "B4", "B3", "A4", "A3"];
+  const halfSeats2 = ["H2", "H1", "G2", "G1", "F2", "F1", "E2", "E1", "D2", "D1", "C2", "C1", "B2", "B1", "A2", "A1"];
 
   // Handle Seat Selection:
   const [counter, setCounter] = useState(0);
@@ -85,12 +68,12 @@ const BookTicket = () => {
     }
   };
 
+  // For Loading Seat:
+  const [loadSeat, setLoadSeat] = useState(false);
   // Booked Ticket Using User Information:
-  const [
-    bookedTicketUsingUserInformation,
-    setBookedTicketUsingUserInformation,
-  ] = useState({});
+  const [bookedTicketUsingUserInformation, setBookedTicketUsingUserInformation] = useState({});
   const handleData = (e) => {
+    setSelectedSeats([]);
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
@@ -101,7 +84,7 @@ const BookTicket = () => {
     const to = form.to.value;
     // const quantity = form.quantity.value;
     const busType = form.busType.value;
-    const pick = form.pick.value;
+    // const pick = form.pick.value;
     const schedule = form.schedule.value;
 
     const data = {
@@ -112,23 +95,34 @@ const BookTicket = () => {
       from,
       to,
       busType,
-      pick,
       schedule,
       bookedSeat: [],
       payment_status: "done",
       feedback: "pending",
     };
-    setBookedTicketUsingUserInformation(data);
-    const findBus = allBus?.find(
-      (bus) =>
-        bus?.busType == busType && bus?.to == to && busType && bus?.date == date
-    );
+    console.log(data);
 
-    setBookedSeat(findBus?.bookedSeat);
-    findBus && setDisplaySelectSeat(true);
-    setSearchBus(findBus);
-    setSelectedSeats([]);
-    setControl(!control);
+    setBookedTicketUsingUserInformation(data);
+    const url = `http://localhost:5000/getSeat/${data?.from}&&${data?.to}&&${data?.date}&&${data?.busType}&&${data?.schedule}`;
+    setLoadSeat(true)
+    // Make the GET request
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        setBookedSeat(data);
+        if (data) {
+          setDisplaySelectSeat(true)
+          setLoadSeat(false)
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
   };
 
   // *****************Card Information**********************
@@ -142,15 +136,10 @@ const BookTicket = () => {
   };
 
 
-  const handleBookTicket = (bus) => {
+  const handleBookTicket = () => {
+    console.log(bookedTicketUsingUserInformation);
     if (cardNumber === "424242424242" && cardPass === "123456") {
-      const busId = bus?._id;
-      const oldBookedSeat = bus.bookedSeat;
-      console.log(oldBookedSeat);
       const newBookedSeat = selectedSeats;
-      console.log(newBookedSeat);
-      const updateBookedSeat = [...oldBookedSeat, ...newBookedSeat];
-      console.log(updateBookedSeat);
       bookedTicketUsingUserInformation.bookedSeat = newBookedSeat;
       bookedTicketUsingUserInformation.payment = "done";
       bookedTicketUsingUserInformation.amount = amount;
@@ -163,20 +152,15 @@ const BookTicket = () => {
         .replace(/\//g, "-");
       console.log(bookedTicketUsingUserInformation);
 
-      const updateTicketBooking = {
-        bus_id: busId,
-        updateBookedSeat: updateBookedSeat,
-      };
       fetch("http://localhost:5000/book-ticket", {
-        method: "PUT",
+        method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify(updateTicketBooking),
+        body: JSON.stringify(bookedTicketUsingUserInformation),
       })
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
-
-          if (data.matchedCount > 0) {
+          if (data.acknowledged) {
             setDisplaySelectSeat(false);
             setControl(!control);
             setCounter(0);
@@ -186,13 +170,22 @@ const BookTicket = () => {
               icon: "success",
               confirmButtonText: "Cool",
             });
+            navigate("/my-ticket");
           }
-          navigate("/my-ticket");
+          else {
+            Swal.fire({
+              title: "Something Went Wrong!",
+              text: "",
+              icon: "danger",
+              confirmButtonText: "Cool",
+            });
+            navigate("/");
+          }
         })
         .catch((err) => console.log(err));
 
       // Booked Seat and Post it with User Information:
-      fetch("http://localhost:5000/book-my-ticket", {
+      fetch("https://dhaka-bus-ticket-server-two.vercel.app/book-my-ticket", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(bookedTicketUsingUserInformation),
@@ -235,20 +228,16 @@ const BookTicket = () => {
             />
           </figure>
           <div className="card-body">
-            <div className="max-w-[1200px] mx-auto mt-16">
+            <div className="max-w-[1200px] mx-auto mt-16 w-full">
               <div className="bg-orange-50 py-10">
-                <h1 className="text-4xl lg:text-5xl font-bold m-6 md:m-16 brand-color text-center">
-                  Book Your Ticket
-                </h1>
+                <h1 className="text-4xl lg:text-5xl font-bold m-6 md:m-16 brand-color text-center">Book Your Ticket</h1>
                 <div className="grid md:grid-cols-2 gap-10  text-black rounded-lg">
                   <div>
                     <div className="p-6">
                       <form onSubmit={handleData}>
                         <div className="form-control">
                           <label className="label">
-                            <span className="label-text font-semibold text-lg">
-                              Name
-                            </span>
+                            <span className="label-text font-semibold text-lg">Name</span>
                           </label>
                           <input
                             type="text"
@@ -261,9 +250,7 @@ const BookTicket = () => {
                         </div>
                         <div className="form-control mb-2 mt-2">
                           <label className="label">
-                            <span className="label-text font-semibold text-lg">
-                              Email
-                            </span>
+                            <span className="label-text font-semibold text-lg">Email</span>
                           </label>
                           <input
                             type="email"
@@ -276,9 +263,7 @@ const BookTicket = () => {
                         </div>
                         <div className="form-control mb-2 mt-2">
                           <label className="label">
-                            <span className="label-text font-semibold text-lg">
-                              Phone
-                            </span>
+                            <span className="label-text font-semibold text-lg">Phone</span>
                           </label>
                           <input
                             type="number"
@@ -289,9 +274,7 @@ const BookTicket = () => {
                         </div>
                         <div className="form-control">
                           <label className="label">
-                            <span className="label-text font-semibold text-lg">
-                              Journey Date
-                            </span>
+                            <span className="label-text font-semibold text-lg">Journey Date</span>
                           </label>
                           <input
                             type="date"
@@ -302,51 +285,77 @@ const BookTicket = () => {
                             max={maxDate.toISOString().split("T")[0]} // Set max date to 3 days from today
                           />
                         </div>
-                        <div className="grid grid-cols-2 gap-2 ">
-                          <div className="form-control ">
-                            <label className="label">
-                              <span className="label-text font-semibold text-lg">
-                                From
-                              </span>
-                            </label>
-                            <input
-                              type="text"
-                              placeholder="From"
-                              defaultValue={"Dhaka"}
-                              readOnly
-                              name="from"
-                              className="input input-bordered rounded-md border-orange-400"
-                            />
-                          </div>
-
-                          <div className="form-control ">
-                            <p className="label-text font-semibold text-lg mt-3 mb-1">
-                              To:
-                            </p>
-                            <div className="input-group">
-                              <select
-                                name="to"
-                                className="select select-bordered border-orange-400 input-info rounded-md w-full mb-2"
-                              >
-                                <option disabled selected>
-                                  select Point
-                                </option>
-                                <option>Chattogram</option>
-                                <option>Khulna</option>
-                                <option>Rajshahi</option>
-                                <option>Barishal</option>
-                                <option>Sylhet</option>
-                                <option>Rangpur</option>
-                                <option>Mymensingh</option>
+                        <div className="border-dotted border-orange-400 border-2 p-2 my-2 rounded">
+                          <div><h3 className="text-xl brand-color">From:</h3></div>
+                          <div className="grid grid-cols-2 gap-2 ">
+                            <div className="form-control ">
+                              <label className="label">
+                                <span className="label-text font-semibold text-lg">
+                                  Select Division
+                                </span>
+                              </label>
+                              <select className="input input-bordered rounded-md border-orange-400" id="divisionSelect" value={selectedDivision} onChange={handleDivisionChangeFrom}>
+                                {Object.keys(districtData).map((division) => (
+                                  <option key={division} value={division}>
+                                    {division}
+                                  </option>
+                                ))}
                               </select>
+                            </div>
+
+                            <div className="form-control ">
+                              <p className="label-text font-semibold text-lg mt-3 mb-1">
+                                Select District:
+                              </p>
+                              <div className="input-group">
+                                <select onChange={(e) => setFromDistrict(e.target.value)} name="from" className="select select-bordered border-orange-400 input-info rounded-md w-full mb-2" id="districtSelect">
+                                  {districtData[selectedDivision].map((district) => (
+                                    <option key={district} value={district}>
+                                      {district}
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="border-dotted border-orange-400 border-2 p-2 my-2 rounded">
+                          <div><h3 className="text-xl brand-color">To:</h3></div>
+                          <div className="grid grid-cols-2 gap-2 ">
+                            <div className="form-control ">
+                              <label className="label">
+                                <span className="label-text font-semibold text-lg">
+                                  Select Division
+                                </span>
+                              </label>
+                              <select className="input input-bordered rounded-md border-orange-400" id="divisionSelect" value={selectedDivisionTo} onChange={handleDivisionChangeTo}>
+                                {Object.keys(districtData).map((division) => (
+                                  <option key={division} value={division}>
+                                    {division}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+
+                            <div className="form-control ">
+                              <p className="label-text font-semibold text-lg mt-3 mb-1">
+                                Select District:
+                              </p>
+                              <div className="input-group">
+                                <select name="to" className="select select-bordered border-orange-400 input-info rounded-md w-full mb-2" id="districtSelect">
+                                  {districtData[selectedDivisionTo]?.filter(d => d != fromDistrict).map((district) => (
+                                    <option key={district} value={district}>
+                                      {district}
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
                             </div>
                           </div>
                         </div>
 
                         <div className="form-control ">
-                          <p className="label-text font-semibold text-lg mt-2 mb-2">
-                            Bus Type:
-                          </p>
+                          <p className="label-text font-semibold text-lg mt-2 mb-2">Bus Type:</p>
                           <div className="input-group">
                             <select
                               name="busType"
@@ -362,29 +371,6 @@ const BookTicket = () => {
                         </div>
                         <div className="form-control ">
                           <p className="label-text font-semibold text-lg mt-2">
-                            Pick Point:
-                          </p>
-                          <div className="input-group">
-                            <select
-                              name="pick"
-                              className="select select-bordered border-orange-400 input-info rounded-none w-full mb-2"
-                            >
-                              <option disabled selected>
-                                select Point
-                              </option>
-                              <option>Gabtoli Bus Terminal</option>
-                              <option>Sayedabad Bus Terminal</option>
-                              <option>Mohakhali Bus Terminal</option>
-                              <option>Kalabagan Bus Stand</option>
-                              <option>Jatrabari Bus Terminal</option>
-                              <option>Gulistan Bus Terminal</option>
-                              <option>Kallyanpur Bus Terminal</option>
-                              <option>Arambagh Bus Terminal</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div className="form-control ">
-                          <p className="label-text font-semibold text-lg mt-2">
                             Schedule:
                           </p>
                           <div className="input-group">
@@ -395,7 +381,10 @@ const BookTicket = () => {
                               <option disabled selected>
                                 select schedule
                               </option>
-                              <option>7:00 AM</option>
+                              <option value="7:00 AM">7:00 AM</option>
+                              <option value="8:00 AM">8:00 AM</option>
+                              <option value="7:00 PM">7:00 PM</option>
+                              <option value="8:00 PM">8:00 PM</option>
                             </select>
                           </div>
                         </div>
@@ -412,95 +401,100 @@ const BookTicket = () => {
                     </div>
                   </div>
                   {/* Seat Selection Part */}
-                  <div className="bg-orange-50 py-10 flex justify-center items-center rounded-lg">
-                    <div>
-                      <h1 className="text-3xl font-extrabold brand-color text-center pb-8">
-                        Select Your Seat
-                      </h1>
-                      <div className="flex justify-center items-center">
-                        <div
-                          style={{
-                            height: "15px",
-                            width: "15px",
-                            backgroundColor: "red",
-                          }}
-                        ></div>
-                        <h4 className="ms-4">Already Booked</h4>
-                      </div>
-                      <div className="flex justify-center items-center">
-                        <div
-                          style={{
-                            height: "15px",
-                            width: "15px",
-                            backgroundColor: "rgb(252, 233, 85)",
-                          }}
-                        ></div>
-                        <h4 className="ms-4">Available</h4>
-                      </div>
-                      <div className="grid grid-cols-2 mx-auto gap-x-14 mt-12">
-                        {displaySelectSeat && (
-                          <>
-                            <div className="grid grid-cols-2">
-                              {halfSeats1?.map((seat) => (
-                                <button
-                                  onClick={() => handleSeatSelect(seat)}
-                                  className="btn m-2"
-                                  style={{
-                                    background:
-                                      selectedSeats.includes(seat) ||
-                                        bookedSeat?.includes(seat)
-                                        ? "orangered"
-                                        : "rgb(252, 233, 85)",
-                                  }}
-                                  disabled={
-                                    bookedSeat?.includes(seat) ? true : false
-                                  }
-                                  key={seat}
-                                >
-                                  {seat}
-                                </button>
-                              ))}
-                            </div>
-                            <div className="grid grid-cols-2 ">
-                              {halfSeats2?.map((seat) => (
-                                <button
-                                  onClick={() => handleSeatSelect(seat)}
-                                  className="btn mt-2 ms-2"
-                                  style={{
-                                    background:
-                                      selectedSeats.includes(seat) ||
-                                        bookedSeat?.includes(seat)
-                                        ? "orangered"
-                                        : "rgb(252, 233, 85)",
-                                  }}
-                                  disabled={
-                                    bookedSeat?.includes(seat) ? true : false
-                                  }
-                                  key={seat}
-                                >
-                                  {seat}
-                                </button>
-                              ))}
-                            </div>
-                          </>
-                        )}
-                        <div></div>
-                      </div>
+                  {loadSeat == true ? <div className="h-screen w-full flex justify-center items-center">
+                    <span className="loading loading-spinner loading-lg"></span>
+                  </div> :
+                    <div className="bg-orange-50 py-10 flex justify-center items-center rounded-lg">
+                      <div>
+                        <h1 className="text-3xl font-extrabold brand-color text-center pb-8">
+                          Select Your Seat
+                        </h1>
+                        <div className="flex justify-center items-center">
+                          <div
+                            style={{
+                              height: "15px",
+                              width: "15px",
+                              backgroundColor: "red",
+                            }}
+                          ></div>
+                          <h4 className="ms-4">Already Booked</h4>
+                        </div>
+                        <div className="flex justify-center items-center">
+                          <div
+                            style={{
+                              height: "15px",
+                              width: "15px",
+                              backgroundColor: "rgb(252, 233, 85)",
+                            }}
+                          ></div>
+                          <h4 className="ms-4">Available</h4>
+                        </div>
+                        {
+                          <div className="grid grid-cols-2 mx-auto gap-x-14 mt-12">
+                            {displaySelectSeat && (
+                              <>
+                                <div className="grid grid-cols-2">
+                                  {halfSeats1?.map((seat) => (
+                                    <button
+                                      onClick={() => handleSeatSelect(seat)}
+                                      className="btn m-2"
+                                      style={{
+                                        background:
+                                          selectedSeats.includes(seat) ||
+                                            bookedSeat?.includes(seat)
+                                            ? "orangered"
+                                            : "rgb(252, 233, 85)",
+                                      }}
+                                      disabled={
+                                        bookedSeat?.includes(seat) ? true : false
+                                      }
+                                      key={seat}
+                                    >
+                                      {seat}
+                                    </button>
+                                  ))}
+                                </div>
+                                <div className="grid grid-cols-2 ">
+                                  {halfSeats2?.map((seat) => (
+                                    <button
+                                      onClick={() => handleSeatSelect(seat)}
+                                      className="btn mt-2 ms-2"
+                                      style={{
+                                        background:
+                                          selectedSeats.includes(seat) ||
+                                            bookedSeat?.includes(seat)
+                                            ? "orangered"
+                                            : "rgb(252, 233, 85)",
+                                      }}
+                                      disabled={
+                                        bookedSeat?.includes(seat) ? true : false
+                                      }
+                                      key={seat}
+                                    >
+                                      {seat}
+                                    </button>
+                                  ))}
+                                </div>
+                              </>
+                            )}
+                            <div></div>
+                          </div>
+                        }
 
-                      <div className="flex justify-center mt-4">
-                        {counter > 0 && (
-                          <button
-                            className="btn btn-block brand-btn"
-                            onClick={() =>
-                              document.getElementById("my_modal_4").showModal()
-                            }
-                          >
-                            Book Ticket
-                          </button>
-                        )}
+                        <div className="flex justify-center mt-4">
+                          {counter > 0 && (
+                            <button
+                              className="btn btn-block brand-btn"
+                              onClick={() =>
+                                document.getElementById("my_modal_4").showModal()
+                              }
+                            >
+                              Book Ticket
+                            </button>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  </div>
+                    </div>}
                 </div>
               </div>
             </div>
@@ -509,20 +503,16 @@ const BookTicket = () => {
 
         <dialog id="my_modal_4" className="modal">
           <div className="modal-box w-8/12 md:w-3/12">
-            <h3 className="font-bold text-xl  text-center p-2 brand-color underline">
-              Please Pay Here
-            </h3>
+            <h3 className="font-bold text-xl  text-center p-2 brand-color underline">Please Pay Here</h3>
             <h3 className="font-bold text-lg text-center mt-3">
-              Amount for {selectedSeats.length} Seat:{" "}
-              <span className="brand-color">{amount}</span> BDT
+              Amount for {selectedSeats.length} Seat: <span className="brand-color">{amount}</span> BDT
             </h3>
             <h3 className="font-bold text-lg text-center pb-3">
               Seat Number:{" "}
               {selectedSeats.map((seat, index) => (
                 <span className="brand-color" key={index}>
                   {seat}
-                  {index < selectedSeats.length - 1 && " "}{" "}
-                  {/* Add a space after all elements except the last one */}
+                  {index < selectedSeats.length - 1 && " "} {/* Add a space after all elements except the last one */}
                 </span>
               ))}
             </h3>
@@ -554,7 +544,7 @@ const BookTicket = () => {
             <div className="">
               <form method="dialog">
                 {/* if there is a button, it will close the modal */}
-                <button onClick={() => handleBookTicket(searchBus)} className="btn btn-block brand-btn mt-2">
+                <button onClick={handleBookTicket} className="btn btn-block brand-btn mt-2">
                   Pay
                 </button>
                 <button className="btn btn-block bg-black text-white mt-2 hover:bg-black hover:text-orange-500">
@@ -568,5 +558,5 @@ const BookTicket = () => {
     </>
   );
 };
-
+// Happy Birthday
 export default BookTicket;
