@@ -8,7 +8,7 @@ const UserContact = () => {
 
      useEffect(()=>{
           //To Do :  server api 
-          fetch("../../../public/Data/userContact.json")
+          fetch("http://localhost:5000/contact")
           .then(res=>res.json())
           .then(data=>setContact(data))
      },[])
