@@ -12,7 +12,7 @@ const UpdateNoticesModal = ({ note, control, setControl }) => {
       updateNoticeDate: new Date().toDateString(),
     };
     axios
-      .patch(`http://localhost:5000/update-notice/${note?._id}`, obj)
+      .patch(`https://dhaka-bus-ticket-server-two.vercel.app/update-notice/${note?._id}`, obj)
       .then((res) => {
         if (res?.data?.modifiedCount > 0) {
           setControl(!control);

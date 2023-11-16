@@ -39,9 +39,22 @@ const Footer = () => {
                   </p>
 
                   <div className="py-4 w-full justify-center flex gap-5">
-                    <Link to='https://www.facebook.com/?ref=homescreenpwa' title="Facebook"><FaFacebook className="w-7 h-7 cursor-pointer brand-color rounded"></FaFacebook></Link>
-                    <Link to='https://twitter.com/?lang=en' title="Twitter"><FaTwitterSquare className="w-7 h-7 cursor-pointer brand-color rounded"></FaTwitterSquare></Link>
-                    <Link to='https://www.linkedin.com/learning?trk=homepage-learning_nav-header-logo' title="Linkedin"><FaLinkedin className="w-7 h-7 cursor-pointer brand-color rounded"></FaLinkedin></Link>
+                    <Link
+                      to="https://www.facebook.com/"
+                      target="_blank"
+                      title="Facebook"
+                    >
+                      <FaFacebook className="w-7 h-7 cursor-pointer brand-color rounded"></FaFacebook>
+                    </Link>
+                    <Link to="https://twitter.com/?lang=en" title="Twitter">
+                      <FaTwitterSquare className="w-7 h-7 cursor-pointer brand-color rounded"></FaTwitterSquare>
+                    </Link>
+                    <Link
+                      to="https://www.linkedin.com/learning?trk=homepage-learning_nav-header-logo"
+                      title="Linkedin"
+                    >
+                      <FaLinkedin className="w-7 h-7 cursor-pointer brand-color rounded"></FaLinkedin>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -68,12 +81,6 @@ const Footer = () => {
                   >
                     Terms And Conditions
                   </Link>
-                  <Link
-                    to="/contact"
-                    className="link link-hover block text-base py-1 lg:text-lg"
-                  >
-                    Contact Us
-                  </Link>
                 </div>
               </div>
 
@@ -81,7 +88,10 @@ const Footer = () => {
               <div className="md:mx-auto text-center ">
                 <span className="brand-color text-xl block mb-4">Services</span>
                 <div className="mt-2">
-                  <Link to='/book-ticket' className="link link-hover block text-base py-1 lg:text-lg">
+                  <Link
+                    to="/book-ticket"
+                    className="link link-hover block text-base py-1 lg:text-lg"
+                  >
                     Bus Tickets
                   </Link>
                   {/* <a className="link link-hover block text-base py-1 lg:text-lg">
@@ -95,6 +105,12 @@ const Footer = () => {
                     className="link link-hover block text-base py-1 lg:text-lg"
                   >
                     FAQ
+                  </Link>
+                  <Link
+                    to="/contact"
+                    className="link link-hover block text-base py-1 lg:text-lg"
+                  >
+                    Contact Us
                   </Link>
                 </div>
               </div>
@@ -110,10 +126,16 @@ const Footer = () => {
                   >
                     Blog
                   </Link>
-                  <Link to='/bus-complain' className="link link-hover block text-base py-1 lg:text-lg">
+                  <Link
+                    to="/bus-complain"
+                    className="link link-hover block text-base py-1 lg:text-lg"
+                  >
                     Bus Companies
                   </Link>
-                  <Link to='/travel' className="link link-hover block text-base py-1 lg:text-lg">
+                  <Link
+                    to="/travel"
+                    className="link link-hover block text-base py-1 lg:text-lg"
+                  >
                     Travel Tips
                   </Link>
                   {/* <a className="link link-hover block text-base py-1 lg:text-lg">
