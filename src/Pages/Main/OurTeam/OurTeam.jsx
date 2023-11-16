@@ -56,7 +56,7 @@ const OurTeam = () => {
               imageSrc={masud}
               name="Masud Bhuiyan"
               details={"FULL STACK DEVELOPER"}
-              description={"I love Programming"}
+              description={"I love Programming "}
               facebookLink="https://www.facebook.com/masudbhuiyan1415/"
               githubLink=":https://github.com/MasudBhuiya"
               linkedinLink="https://www.linkedin.com/"
