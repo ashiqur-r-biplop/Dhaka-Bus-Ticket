@@ -381,10 +381,10 @@ const BookTicket = () => {
                               <option disabled selected>
                                 select schedule
                               </option>
-                              <option>7:00 AM</option>
-                              <option>8:00 AM</option>
-                              <option>7:00 PM</option>
-                              <option>8:00 PM</option>
+                              <option value="7:00 AM">7:00 AM</option>
+                              <option value="8:00 AM">8:00 AM</option>
+                              <option value="7:00 PM">7:00 PM</option>
+                              <option value="8:00 PM">8:00 PM</option>
                             </select>
                           </div>
                         </div>
