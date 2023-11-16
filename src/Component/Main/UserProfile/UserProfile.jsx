@@ -14,6 +14,7 @@ const UserProfile = () => {
   const photoURL = user?.photoURL;
   const [control, setControl] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const[bills,setBills]= useState();
 
   const fetchData = async () => {
     try {
@@ -48,6 +49,8 @@ const UserProfile = () => {
     month,
     year,
   };
+
+ 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -62,13 +65,13 @@ const UserProfile = () => {
         .then((res) => {
           console.log(res.data);
 
-          // Swal.fire({
-          //   position: "top",
-          //   icon: "success",
-          //   title: "User Profile Updated",
-          //   showConfirmButton: false,
-          //   timer: 1500,
-          // });
+          Swal.fire({
+            position: "top",
+            icon: "success",
+            title: "User Profile Updated",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         })
         .catch((error) => { });
     } catch (error) {
