@@ -9,7 +9,7 @@ const Myticket = () => {
   const [loading, setLoading] = useState(false);
   console.log(user.email);
   useEffect(() => {
-    fetch(`http://localhost:5000/my-ticket/${user?.email}`)
+    fetch(`https://dhaka-bus-ticket-server-two.vercel.app/my-ticket/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setTickets(data);
@@ -38,6 +38,24 @@ const Myticket = () => {
 
   return (
     <div className="w-full  my-5 ">
+
+{/* ******************* serach ************** */}
+<div className="">
+            <button className="brand-btn btn-block p-2  transition duration-75">
+              Search Here:{" "}
+              <input
+                type="text"
+                className="p-1 ps-2 rounded-full text-black "
+                placeholder="Search"
+                id="search"
+                onChange={handleChange}
+              />
+            </button>
+          </div>
+
+          {/* *********************search ************** */}
+
+
       <div className="">
         <button className="brand-btn btn-block p-2  transition duration-75">
           Search Here:{" "}
@@ -50,6 +68,7 @@ const Myticket = () => {
           />
         </button>
       </div>
+      
       {/* search options ends here */}
       <div className="md:hidden">
         <table className="table w-full  flex table-sm">
@@ -63,23 +82,23 @@ const Myticket = () => {
                     : "text-black bg-red-300 flex flex-col"
                 }
               >
-                <td className="text-xl flex"><span className='text-white font-bold w-[30%] bg-orange-600 flex items-center justify-center -my-2 me-3'>Name: </span>{user.name} </td>
+                <td className="sm:text-xl flex"><span className='text-white font-bold w-[40%] bg-orange-600 flex items-center justify-center -my-2 me-3'>Name: </span>{user.name} </td>
                 <hr className="font-bold" />
-                <td className="text-xl flex"><span className='text-white font-bold w-[30%] bg-orange-600 flex items-center justify-center -my-2 me-3'>Email: </span>{user.email}</td>
+                <td className="sm:text-xl flex"><span className='text-white font-bold w-[40%] bg-orange-600 flex items-center justify-center -my-2 me-3'>Email: </span>{user.email}</td>
                 <hr className="font-bold" />
-                <td className="text-xl flex"><span className='text-white font-bold w-[30%] bg-orange-600 flex items-center justify-center -my-2 me-3'>Phone: </span>{user.phone}</td>
+                <td className="sm:text-xl flex"><span className='text-white font-bold w-[40%] bg-orange-600 flex items-center justify-center -my-2 me-3'>Phone: </span>{user.phone}</td>
                 <hr className="font-bold" />
-                <td className="text-xl flex"><span className='text-white font-bold w-[30%] bg-orange-600 flex items-center justify-center -my-2 me-3'>BusType: </span>{user.busType}</td>
+                <td className="sm:text-xl flex"><span className='text-white font-bold w-[40%] bg-orange-600 flex items-center justify-center -my-2 me-3'>BusType: </span>{user.busType}</td>
                 <hr className="font-bold" />
-                <td className="text-xl flex"><span className='text-white font-bold w-[30%] bg-orange-600 flex items-center justify-center -my-2 me-3'>Destination: </span>{user.to}</td>
+                <td className="sm:text-xl flex"><span className='text-white font-bold w-[40%] bg-orange-600 flex items-center justify-center -my-2 me-3'>Destination: </span>{user.to}</td>
                 <hr className="font-bold" />
-                <td className="text-xl flex"><span className='text-white font-bold w-[30%] bg-orange-600 flex items-center justify-center -my-2 me-3'>Schedule: </span>{user.schedule}</td>
+                <td className="sm:text-xl flex"><span className='text-white font-bold w-[40%] bg-orange-600 flex items-center justify-center -my-2 me-3'>Schedule: </span>{user.schedule}</td>
                 <hr className="font-bold" />
-                <td className="text-xl flex"><span className='text-white font-bold w-[30%] bg-orange-600 flex items-center justify-center -my-2 me-3'>Date: </span>{user.bookedDate}</td>
+                <td className="sm:text-xl flex"><span className='text-white font-bold w-[40%] bg-orange-600 flex items-center justify-center -my-2 me-3'>Date: </span>{user.bookedDate}</td>
                 <hr className="font-bold border-2 border-white" />
                 {/* <Link to="/user-feedback"></Link> */}
-                <td className="text-xl flex">
-                  <span className='text-white font-bold w-[30%] bg-orange-600 flex items-center justify-center -my-2 me-3'>Feedback: </span>{user.feedbackSent ? (
+                <td className="sm:text-xl flex">
+                  <span className='text-white font-bold w-[40%] bg-orange-600 flex items-center justify-center -my-2 me-3'>Feedback: </span>{user.feedbackSent ? (
                     <>
                       <button
                         disabled

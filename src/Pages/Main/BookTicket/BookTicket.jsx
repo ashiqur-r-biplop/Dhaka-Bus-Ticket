@@ -26,7 +26,7 @@ const BookTicket = () => {
   const [allBus, setAllBus] = useState([]);
   const [control, setControl] = useState(false);
   useEffect(() => {
-    fetch("http://localhost:5000/all-bus")
+    fetch("https://dhaka-bus-ticket-server-two.vercel.app/all-bus")
       .then((res) => res.json())
       .then((data) => {
         setAllBus(data);
@@ -34,42 +34,8 @@ const BookTicket = () => {
       });
   }, [control, bookedSeat, displaySelectSeat]);
 
-  const halfSeats1 = [
-    "H4",
-    "H3",
-    "G4",
-    "G3",
-    "F4",
-    "F3",
-    "E4",
-    "E3",
-    "D4",
-    "D3",
-    "C4",
-    "C3",
-    "B4",
-    "B3",
-    "A4",
-    "A3",
-  ];
-  const halfSeats2 = [
-    "H2",
-    "H1",
-    "G2",
-    "G1",
-    "F2",
-    "F1",
-    "E2",
-    "E1",
-    "D2",
-    "D1",
-    "C2",
-    "C1",
-    "B2",
-    "B1",
-    "A2",
-    "A1",
-  ];
+  const halfSeats1 = ["H4", "H3", "G4", "G3", "F4", "F3", "E4", "E3", "D4", "D3", "C4", "C3", "B4", "B3", "A4", "A3"];
+  const halfSeats2 = ["H2", "H1", "G2", "G1", "F2", "F1", "E2", "E1", "D2", "D1", "C2", "C1", "B2", "B1", "A2", "A1"];
 
   // Handle Seat Selection:
   const [counter, setCounter] = useState(0);
@@ -86,10 +52,7 @@ const BookTicket = () => {
   };
 
   // Booked Ticket Using User Information:
-  const [
-    bookedTicketUsingUserInformation,
-    setBookedTicketUsingUserInformation,
-  ] = useState({});
+  const [bookedTicketUsingUserInformation, setBookedTicketUsingUserInformation] = useState({});
   const handleData = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -119,10 +82,7 @@ const BookTicket = () => {
       feedback: "pending",
     };
     setBookedTicketUsingUserInformation(data);
-    const findBus = allBus?.find(
-      (bus) =>
-        bus?.busType == busType && bus?.to == to && busType && bus?.date == date
-    );
+    const findBus = allBus?.find((bus) => bus?.busType == busType && bus?.to == to && busType && bus?.date == date);
 
     setBookedSeat(findBus?.bookedSeat);
     findBus && setDisplaySelectSeat(true);
@@ -167,7 +127,7 @@ const BookTicket = () => {
         bus_id: busId,
         updateBookedSeat: updateBookedSeat,
       };
-      fetch("http://localhost:5000/book-ticket", {
+      fetch("https://dhaka-bus-ticket-server-two.vercel.app/book-ticket", {
         method: "PUT",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(updateTicketBooking),
@@ -192,7 +152,7 @@ const BookTicket = () => {
         .catch((err) => console.log(err));
 
       // Booked Seat and Post it with User Information:
-      fetch("http://localhost:5000/book-my-ticket", {
+      fetch("https://dhaka-bus-ticket-server-two.vercel.app/book-my-ticket", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(bookedTicketUsingUserInformation),
@@ -237,18 +197,14 @@ const BookTicket = () => {
           <div className="card-body">
             <div className="max-w-[1200px] mx-auto mt-16">
               <div className="bg-orange-50 py-10">
-                <h1 className="text-4xl lg:text-5xl font-bold m-6 md:m-16 brand-color text-center">
-                  Book Your Ticket
-                </h1>
+                <h1 className="text-4xl lg:text-5xl font-bold m-6 md:m-16 brand-color text-center">Book Your Ticket</h1>
                 <div className="grid md:grid-cols-2 gap-10  text-black rounded-lg">
                   <div>
                     <div className="p-6">
                       <form onSubmit={handleData}>
                         <div className="form-control">
                           <label className="label">
-                            <span className="label-text font-semibold text-lg">
-                              Name
-                            </span>
+                            <span className="label-text font-semibold text-lg">Name</span>
                           </label>
                           <input
                             type="text"
@@ -261,9 +217,7 @@ const BookTicket = () => {
                         </div>
                         <div className="form-control mb-2 mt-2">
                           <label className="label">
-                            <span className="label-text font-semibold text-lg">
-                              Email
-                            </span>
+                            <span className="label-text font-semibold text-lg">Email</span>
                           </label>
                           <input
                             type="email"
@@ -276,9 +230,7 @@ const BookTicket = () => {
                         </div>
                         <div className="form-control mb-2 mt-2">
                           <label className="label">
-                            <span className="label-text font-semibold text-lg">
-                              Phone
-                            </span>
+                            <span className="label-text font-semibold text-lg">Phone</span>
                           </label>
                           <input
                             type="number"
@@ -289,9 +241,7 @@ const BookTicket = () => {
                         </div>
                         <div className="form-control">
                           <label className="label">
-                            <span className="label-text font-semibold text-lg">
-                              Journey Date
-                            </span>
+                            <span className="label-text font-semibold text-lg">Journey Date</span>
                           </label>
                           <input
                             type="date"
@@ -305,9 +255,7 @@ const BookTicket = () => {
                         <div className="grid grid-cols-2 gap-2 ">
                           <div className="form-control ">
                             <label className="label">
-                              <span className="label-text font-semibold text-lg">
-                                From
-                              </span>
+                              <span className="label-text font-semibold text-lg">From</span>
                             </label>
                             <input
                               type="text"
@@ -320,9 +268,7 @@ const BookTicket = () => {
                           </div>
 
                           <div className="form-control ">
-                            <p className="label-text font-semibold text-lg mt-3 mb-1">
-                              To:
-                            </p>
+                            <p className="label-text font-semibold text-lg mt-3 mb-1">To:</p>
                             <div className="input-group">
                               <select
                                 name="to"
@@ -344,9 +290,7 @@ const BookTicket = () => {
                         </div>
 
                         <div className="form-control ">
-                          <p className="label-text font-semibold text-lg mt-2 mb-2">
-                            Bus Type:
-                          </p>
+                          <p className="label-text font-semibold text-lg mt-2 mb-2">Bus Type:</p>
                           <div className="input-group">
                             <select
                               name="busType"
@@ -361,9 +305,7 @@ const BookTicket = () => {
                           </div>
                         </div>
                         <div className="form-control ">
-                          <p className="label-text font-semibold text-lg mt-2">
-                            Pick Point:
-                          </p>
+                          <p className="label-text font-semibold text-lg mt-2">Pick Point:</p>
                           <div className="input-group">
                             <select
                               name="pick"
@@ -384,9 +326,7 @@ const BookTicket = () => {
                           </div>
                         </div>
                         <div className="form-control ">
-                          <p className="label-text font-semibold text-lg mt-2">
-                            Schedule:
-                          </p>
+                          <p className="label-text font-semibold text-lg mt-2">Schedule:</p>
                           <div className="input-group">
                             <select
                               name="schedule"
@@ -414,9 +354,7 @@ const BookTicket = () => {
                   {/* Seat Selection Part */}
                   <div className="bg-orange-50 py-10 flex justify-center items-center rounded-lg">
                     <div>
-                      <h1 className="text-3xl font-extrabold brand-color text-center pb-8">
-                        Select Your Seat
-                      </h1>
+                      <h1 className="text-3xl font-extrabold brand-color text-center pb-8">Select Your Seat</h1>
                       <div className="flex justify-center items-center">
                         <div
                           style={{
@@ -452,9 +390,7 @@ const BookTicket = () => {
                                         ? "orangered"
                                         : "rgb(252, 233, 85)",
                                   }}
-                                  disabled={
-                                    bookedSeat?.includes(seat) ? true : false
-                                  }
+                                  disabled={bookedSeat?.includes(seat) ? true : false}
                                   key={seat}
                                 >
                                   {seat}
@@ -473,9 +409,7 @@ const BookTicket = () => {
                                         ? "orangered"
                                         : "rgb(252, 233, 85)",
                                   }}
-                                  disabled={
-                                    bookedSeat?.includes(seat) ? true : false
-                                  }
+                                  disabled={bookedSeat?.includes(seat) ? true : false}
                                   key={seat}
                                 >
                                   {seat}
@@ -491,9 +425,7 @@ const BookTicket = () => {
                         {counter > 0 && (
                           <button
                             className="btn btn-block brand-btn"
-                            onClick={() =>
-                              document.getElementById("my_modal_4").showModal()
-                            }
+                            onClick={() => document.getElementById("my_modal_4").showModal()}
                           >
                             Book Ticket
                           </button>
@@ -509,20 +441,16 @@ const BookTicket = () => {
 
         <dialog id="my_modal_4" className="modal">
           <div className="modal-box w-8/12 md:w-3/12">
-            <h3 className="font-bold text-xl  text-center p-2 brand-color underline">
-              Please Pay Here
-            </h3>
+            <h3 className="font-bold text-xl  text-center p-2 brand-color underline">Please Pay Here</h3>
             <h3 className="font-bold text-lg text-center mt-3">
-              Amount for {selectedSeats.length} Seat:{" "}
-              <span className="brand-color">{amount}</span> BDT
+              Amount for {selectedSeats.length} Seat: <span className="brand-color">{amount}</span> BDT
             </h3>
             <h3 className="font-bold text-lg text-center pb-3">
               Seat Number:{" "}
               {selectedSeats.map((seat, index) => (
                 <span className="brand-color" key={index}>
                   {seat}
-                  {index < selectedSeats.length - 1 && " "}{" "}
-                  {/* Add a space after all elements except the last one */}
+                  {index < selectedSeats.length - 1 && " "} {/* Add a space after all elements except the last one */}
                 </span>
               ))}
             </h3>

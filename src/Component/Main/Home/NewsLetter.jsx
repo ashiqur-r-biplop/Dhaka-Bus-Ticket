@@ -6,29 +6,26 @@ import { AuthContext } from "../../../AuthProvider/AuthProvider";
 
 const NewsLetter = () => {
   const [email, setEmail] = useState("");
-  const {subscriberControl,setSubcriberControl } = useContext(AuthContext);
+  const { subscribeControl, setSubscribeControl } = useContext(AuthContext);
 
   const handleInputChange = (e) => {
     setEmail(e.target.value); // this value  is user email
   };
   const handelSubmit = () => {
-    console.log(email);
-      axios
-        .post("http://localhost:5000/subscriber", { email })
-        .then((res) => {
-         
-          if(res.data.acknowledged===true){
-            setSubcriberControl(!subscriberControl)
-             Swal.fire("Thank you for Subscription!", "You will Recieve our latest update", "success");
-            
-          }
-
-        })
-        .catch((error) => console.log(error));
-      //  this value save the data base when any user subscribe
-
-    
-   
+    axios
+      .post("https://dhaka-bus-ticket-server-two.vercel.app/subscriber", { email })
+      .then((res) => {
+        if (res.data.acknowledged === true) {
+          Swal.fire(
+            "Thank you for Subscription!",
+            "You will Recieve our latest update",
+            "success"
+          );
+          setSubscribeControl(!subscribeControl);
+        }
+      })
+      .catch((error) => console.log(error?.message));
+    //  this value save the data base when any user subscribe
   };
 
   return (
