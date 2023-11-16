@@ -78,7 +78,7 @@ const BookBusComponent = () => {
     if (cardNumber == "424242424242" && cardPass == "123456") {
 
       // ********Book Bus Post Method****************
-      fetch('http://localhost:5000/book-bus', {
+      fetch('https://dhaka-bus-ticket-server-two.vercel.app/book-bus', {
         method: 'POST',
         headers: {
           'content-type': 'application/json'

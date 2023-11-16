@@ -81,7 +81,7 @@ function BusPostForm() {
     console.log(data);
     const t = data.to;
 
-    fetch("http://localhost:5000/post-bus", {
+    fetch("https://dhaka-bus-ticket-server-two.vercel.app/post-bus", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

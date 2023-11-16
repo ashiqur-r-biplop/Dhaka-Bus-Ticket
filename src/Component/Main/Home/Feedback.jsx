@@ -35,7 +35,7 @@ const Feedback = () => {
     // console.log(name, photo, rating, feedbackMessage);
 
     axios
-      .post("http://localhost:5000/user-feedback", userFeedback)
+      .post("https://dhaka-bus-ticket-server-two.vercel.app/user-feedback", userFeedback)
       .then((res) => {
         console.log(res.data.result);
         if (res.data.result.acknowledged === true) {

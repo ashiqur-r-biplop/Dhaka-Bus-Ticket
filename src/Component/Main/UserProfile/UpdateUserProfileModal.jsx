@@ -1,60 +1,70 @@
-import React from "react";
+ 
+ 
+ 
+import { useForm } from "react-hook-form";
 
-const UpdateUserProfileModal = ({
-  currentUser,
-  handleFormSubmit,
-  userName,
-  userNumber,
-}) => {
-  // console.log(currentUser);
+const UpdateUserProfileModal = ({currentUser,}) => {
+    
+  console.log(currentUser);
+  const { register, handleSubmit,  } = useForm();
+  const onSubmit = data =>{ 
+     console.log(data)
 
+      
+
+
+
+};
+
+
+
+
+  
   return (
-    <dialog id="my_modal_3" className="modal">
-      <div className="modal-box w-full">
-        <form method="dialog" onSubmit={handleFormSubmit}>
-          <h3 className=" text-lg text-center">Fill The Form!</h3>
-          <div className="grid grid-cols-1  mx-auto md:gap-x-12">
-            <div>
-              <div>
-                <p className="text-lg">Name:</p>
-                <input
-                  type="text"
-                  // placeholder="Full Name"
-                  defaultValue={currentUser?.name}
-                  ref={userName}
-                  name="name"
-                  className="input input-bordered  w-full mb-2"
-                />
-              </div>
-              <div>
-                <p className="text-lg">Email:</p>
-                <input
-                  type="email"
-                  defaultValue={currentUser?.email}
-                  disabled
-                  name="email"
-                  className="input input-bordered  w-full mb-2"
-                />
-              </div>
-
-              <div>
-                <p className="text-lg">Phone:</p>
-                <input
-                  type="number"
-                  defaultValue={currentUser?.number}
-                  ref={userNumber}
-                  name="phone"
-                  className="input input-bordered w-full  mb-2"
-                />
-              </div>
-            </div>
+     <dialog id="my_modal_1" className="modal">
+        <div className="modal-box">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <p className="text-lg">Name:</p>
+            <input
+              {...register("name")}
+              type="text"
+              
+              name="name"
+              className="input input-bordered  w-full mb-2"
+            />
           </div>
-          <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-            ✕
-          </button>
+          <div>
+            <p className="text-lg">Email:</p>
+            <input
+              {...register("email")}
+              type="text"
+              name="email" // Corrected the name attribute
+              className="input input-bordered  w-full mb-2"
+            />
+          </div>
+          <div>
+            <p className="text-lg">Phone:</p>
+            <input
+              {...register("number")}
+              type="number"
+              name="number" // Corrected the name attribute
+              className="input input-bordered  w-full mb-2"
+            />
+          </div>
+          <input
+            type="submit"
+            value="Save"
+            className="brand-btn w-full p-3 rounded-xl mt-2"
+          />
         </form>
-      </div>
-    </dialog>
+          <div className="modal-action">
+            <button
+            className="btn btn-sm btn-circle btn-ghost absolute right-4 top-2"
+            onClick={() => document.getElementById("my_modal_1").close()}>✕</button>
+          </div>
+        </div>
+     </dialog>
   );
 };
 
