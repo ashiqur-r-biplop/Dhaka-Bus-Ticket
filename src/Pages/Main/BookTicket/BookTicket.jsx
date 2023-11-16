@@ -7,32 +7,49 @@ import payment from "../../../assets/payment.png";
 import { useNavigate } from "react-router";
 
 const BookTicket = () => {
+  // Dev-Akash
   const navigate = useNavigate();
   const loadUser = useContext(AuthContext);
   const { user } = loadUser;
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [bookedSeat, setBookedSeat] = useState([]);
   const [displaySelectSeat, setDisplaySelectSeat] = useState(false);
-  const [searchBus, setSearchBus] = useState(null);
-  // console.log(selectedSeats)
-  // console.log(user);
+  console.log(selectedSeats)
+
+  // *****************All District Information and functionality:
+  const [selectedDivision, setSelectedDivision] = useState('Dhaka');
+  const [selectedDivisionTo, setSelectedDivisionTo] = useState('Dhaka');
+  const districtData = {
+    Dhaka: ["Dhaka", "Gazipur", "Tangail", "Munshiganj", "Narayanganj"],
+    Chattogram: ["Chattogram", "Cox's Bazar", "Comilla", "Feni", "Noakhali"],
+    Rajshahi: ["Rajshahi", "Bogra", "Pabna", "Naogaon", "Sirajganj"],
+    Khulna: ["Khulna", "Jessore", "Satkhira", "Bagerhat", "Magura"],
+    Barisal: ["Barisal", "Bhola", "Patuakhali", "Pirojpur", "Jhalokathi"],
+    Sylhet: ["Sylhet", "Moulvibazar", "Habiganj", "Sunamganj"],
+    Rangpur: ["Rangpur", "Dinajpur", "Kurigram", "Lalmonirhat", "Thakurgaon"],
+    Mymensingh: ["Mymensingh", "Jamalpur", "Netrokona", "Sherpur"]
+  };
+  const handleDivisionChangeFrom = (event) => {
+    setSelectedDivision(event?.target?.value);
+  };
+  const handleDivisionChangeTo = (event) => {
+    setSelectedDivisionTo(event.target.value);
+  };
 
   // ****************Date Handle****************************
   const currentDate = new Date();
-  const maxDate = new Date();
-  maxDate.setDate(currentDate.getDate() + 2);
+
+  // Set the time zone to Bangladesh Standard Time (BST)
+  const options = { timeZone: 'Asia/Dhaka' };
+  const currentDateInBangladesh = new Date(currentDate.toLocaleString('en-US', options));
+
+  // Set the max date to 6 days ahead
+  const maxDate = new Date(currentDateInBangladesh);
+  maxDate.setDate(currentDateInBangladesh.getDate() + 6);
+
 
   // Load All Bus:
-  const [allBus, setAllBus] = useState([]);
   const [control, setControl] = useState(false);
-  useEffect(() => {
-    fetch("https://dhaka-bus-ticket-server-two.vercel.app/all-bus")
-      .then((res) => res.json())
-      .then((data) => {
-        setAllBus(data);
-        // console.log(data);
-      });
-  }, [control, bookedSeat, displaySelectSeat]);
 
   const halfSeats1 = ["H4", "H3", "G4", "G3", "F4", "F3", "E4", "E3", "D4", "D3", "C4", "C3", "B4", "B3", "A4", "A3"];
   const halfSeats2 = ["H2", "H1", "G2", "G1", "F2", "F1", "E2", "E1", "D2", "D1", "C2", "C1", "B2", "B1", "A2", "A1"];
@@ -54,6 +71,7 @@ const BookTicket = () => {
   // Booked Ticket Using User Information:
   const [bookedTicketUsingUserInformation, setBookedTicketUsingUserInformation] = useState({});
   const handleData = (e) => {
+    setSelectedSeats([]);
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
@@ -64,7 +82,7 @@ const BookTicket = () => {
     const to = form.to.value;
     // const quantity = form.quantity.value;
     const busType = form.busType.value;
-    const pick = form.pick.value;
+    // const pick = form.pick.value;
     const schedule = form.schedule.value;
 
     const data = {
@@ -75,20 +93,36 @@ const BookTicket = () => {
       from,
       to,
       busType,
-      pick,
       schedule,
       bookedSeat: [],
       payment_status: "done",
       feedback: "pending",
     };
-    setBookedTicketUsingUserInformation(data);
-    const findBus = allBus?.find((bus) => bus?.busType == busType && bus?.to == to && busType && bus?.date == date);
+    console.log(data);
 
-    setBookedSeat(findBus?.bookedSeat);
-    findBus && setDisplaySelectSeat(true);
-    setSearchBus(findBus);
-    setSelectedSeats([]);
-    setControl(!control);
+    setBookedTicketUsingUserInformation(data);
+    const url = `http://localhost:5000/getSeat/${data?.from}&&${data?.to}&&${data?.date}&&${data?.busType}&&${data?.schedule}`;
+
+    // Make the GET request
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        setBookedSeat(data);
+        if (data) {
+          setDisplaySelectSeat(true)
+        }
+        else {
+          return 'loading'
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
   };
 
   // *****************Card Information**********************
@@ -102,15 +136,10 @@ const BookTicket = () => {
   };
 
 
-  const handleBookTicket = (bus) => {
+  const handleBookTicket = () => {
+    console.log(bookedTicketUsingUserInformation);
     if (cardNumber === "424242424242" && cardPass === "123456") {
-      const busId = bus?._id;
-      const oldBookedSeat = bus.bookedSeat;
-      console.log(oldBookedSeat);
       const newBookedSeat = selectedSeats;
-      console.log(newBookedSeat);
-      const updateBookedSeat = [...oldBookedSeat, ...newBookedSeat];
-      console.log(updateBookedSeat);
       bookedTicketUsingUserInformation.bookedSeat = newBookedSeat;
       bookedTicketUsingUserInformation.payment = "done";
       bookedTicketUsingUserInformation.amount = amount;
@@ -123,20 +152,15 @@ const BookTicket = () => {
         .replace(/\//g, "-");
       console.log(bookedTicketUsingUserInformation);
 
-      const updateTicketBooking = {
-        bus_id: busId,
-        updateBookedSeat: updateBookedSeat,
-      };
-      fetch("https://dhaka-bus-ticket-server-two.vercel.app/book-ticket", {
-        method: "PUT",
+      fetch("http://localhost:5000/book-ticket", {
+        method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify(updateTicketBooking),
+        body: JSON.stringify(bookedTicketUsingUserInformation),
       })
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
-
-          if (data.matchedCount > 0) {
+          if (data.acknowledged) {
             setDisplaySelectSeat(false);
             setControl(!control);
             setCounter(0);
@@ -146,8 +170,17 @@ const BookTicket = () => {
               icon: "success",
               confirmButtonText: "Cool",
             });
+            navigate("/my-ticket");
           }
-          navigate("/my-ticket");
+          else {
+            Swal.fire({
+              title: "Something Went Wrong!",
+              text: "",
+              icon: "danger",
+              confirmButtonText: "Cool",
+            });
+            navigate("/");
+          }
         })
         .catch((err) => console.log(err));
 
@@ -195,7 +228,7 @@ const BookTicket = () => {
             />
           </figure>
           <div className="card-body">
-            <div className="max-w-[1200px] mx-auto mt-16">
+            <div className="max-w-[1200px] mx-auto mt-16 w-full">
               <div className="bg-orange-50 py-10">
                 <h1 className="text-4xl lg:text-5xl font-bold m-6 md:m-16 brand-color text-center">Book Your Ticket</h1>
                 <div className="grid md:grid-cols-2 gap-10  text-black rounded-lg">
@@ -252,39 +285,71 @@ const BookTicket = () => {
                             max={maxDate.toISOString().split("T")[0]} // Set max date to 3 days from today
                           />
                         </div>
-                        <div className="grid grid-cols-2 gap-2 ">
-                          <div className="form-control ">
-                            <label className="label">
-                              <span className="label-text font-semibold text-lg">From</span>
-                            </label>
-                            <input
-                              type="text"
-                              placeholder="From"
-                              defaultValue={"Dhaka"}
-                              readOnly
-                              name="from"
-                              className="input input-bordered rounded-md border-orange-400"
-                            />
-                          </div>
-
-                          <div className="form-control ">
-                            <p className="label-text font-semibold text-lg mt-3 mb-1">To:</p>
-                            <div className="input-group">
-                              <select
-                                name="to"
-                                className="select select-bordered border-orange-400 input-info rounded-md w-full mb-2"
-                              >
-                                <option disabled selected>
-                                  select Point
-                                </option>
-                                <option>Chattogram</option>
-                                <option>Khulna</option>
-                                <option>Rajshahi</option>
-                                <option>Barishal</option>
-                                <option>Sylhet</option>
-                                <option>Rangpur</option>
-                                <option>Mymensingh</option>
+                        <div className="border-dotted border-orange-400 border-2 p-2 my-2 rounded">
+                          <div><h3 className="text-xl brand-color">From:</h3></div>
+                          <div className="grid grid-cols-2 gap-2 ">
+                            <div className="form-control ">
+                              <label className="label">
+                                <span className="label-text font-semibold text-lg">
+                                  Select Division
+                                </span>
+                              </label>
+                              <select className="input input-bordered rounded-md border-orange-400" id="divisionSelect" value={selectedDivision} onChange={handleDivisionChangeFrom}>
+                                {Object.keys(districtData).map((division) => (
+                                  <option key={division} value={division}>
+                                    {division}
+                                  </option>
+                                ))}
                               </select>
+                            </div>
+
+                            <div className="form-control ">
+                              <p className="label-text font-semibold text-lg mt-3 mb-1">
+                                Select District:
+                              </p>
+                              <div className="input-group">
+                                <select name="from" className="select select-bordered border-orange-400 input-info rounded-md w-full mb-2" id="districtSelect">
+                                  {districtData[selectedDivision].map((district) => (
+                                    <option key={district} value={district}>
+                                      {district}
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="border-dotted border-orange-400 border-2 p-2 my-2 rounded">
+                          <div><h3 className="text-xl brand-color">To:</h3></div>
+                          <div className="grid grid-cols-2 gap-2 ">
+                            <div className="form-control ">
+                              <label className="label">
+                                <span className="label-text font-semibold text-lg">
+                                  Select Division
+                                </span>
+                              </label>
+                              <select className="input input-bordered rounded-md border-orange-400" id="divisionSelect" value={selectedDivisionTo} onChange={handleDivisionChangeTo}>
+                                {Object.keys(districtData).map((division) => (
+                                  <option key={division} value={division}>
+                                    {division}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+
+                            <div className="form-control ">
+                              <p className="label-text font-semibold text-lg mt-3 mb-1">
+                                Select District:
+                              </p>
+                              <div className="input-group">
+                                <select name="to" className="select select-bordered border-orange-400 input-info rounded-md w-full mb-2" id="districtSelect">
+                                  {districtData[selectedDivisionTo].map((district) => (
+                                    <option key={district} value={district}>
+                                      {district}
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -305,28 +370,9 @@ const BookTicket = () => {
                           </div>
                         </div>
                         <div className="form-control ">
-                          <p className="label-text font-semibold text-lg mt-2">Pick Point:</p>
-                          <div className="input-group">
-                            <select
-                              name="pick"
-                              className="select select-bordered border-orange-400 input-info rounded-none w-full mb-2"
-                            >
-                              <option disabled selected>
-                                select Point
-                              </option>
-                              <option>Gabtoli Bus Terminal</option>
-                              <option>Sayedabad Bus Terminal</option>
-                              <option>Mohakhali Bus Terminal</option>
-                              <option>Kalabagan Bus Stand</option>
-                              <option>Jatrabari Bus Terminal</option>
-                              <option>Gulistan Bus Terminal</option>
-                              <option>Kallyanpur Bus Terminal</option>
-                              <option>Arambagh Bus Terminal</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div className="form-control ">
-                          <p className="label-text font-semibold text-lg mt-2">Schedule:</p>
+                          <p className="label-text font-semibold text-lg mt-2">
+                            Schedule:
+                          </p>
                           <div className="input-group">
                             <select
                               name="schedule"
@@ -336,6 +382,9 @@ const BookTicket = () => {
                                 select schedule
                               </option>
                               <option>7:00 AM</option>
+                              <option>8:00 AM</option>
+                              <option>7:00 PM</option>
+                              <option>8:00 PM</option>
                             </select>
                           </div>
                         </div>
@@ -375,51 +424,57 @@ const BookTicket = () => {
                         ></div>
                         <h4 className="ms-4">Available</h4>
                       </div>
-                      <div className="grid grid-cols-2 mx-auto gap-x-14 mt-12">
-                        {displaySelectSeat && (
-                          <>
-                            <div className="grid grid-cols-2">
-                              {halfSeats1?.map((seat) => (
-                                <button
-                                  onClick={() => handleSeatSelect(seat)}
-                                  className="btn m-2"
-                                  style={{
-                                    background:
-                                      selectedSeats.includes(seat) ||
-                                        bookedSeat?.includes(seat)
-                                        ? "orangered"
-                                        : "rgb(252, 233, 85)",
-                                  }}
-                                  disabled={bookedSeat?.includes(seat) ? true : false}
-                                  key={seat}
-                                >
-                                  {seat}
-                                </button>
-                              ))}
-                            </div>
-                            <div className="grid grid-cols-2 ">
-                              {halfSeats2?.map((seat) => (
-                                <button
-                                  onClick={() => handleSeatSelect(seat)}
-                                  className="btn mt-2 ms-2"
-                                  style={{
-                                    background:
-                                      selectedSeats.includes(seat) ||
-                                        bookedSeat?.includes(seat)
-                                        ? "orangered"
-                                        : "rgb(252, 233, 85)",
-                                  }}
-                                  disabled={bookedSeat?.includes(seat) ? true : false}
-                                  key={seat}
-                                >
-                                  {seat}
-                                </button>
-                              ))}
-                            </div>
-                          </>
-                        )}
-                        <div></div>
-                      </div>
+                      {
+                        <div className="grid grid-cols-2 mx-auto gap-x-14 mt-12">
+                          {displaySelectSeat && (
+                            <>
+                              <div className="grid grid-cols-2">
+                                {halfSeats1?.map((seat) => (
+                                  <button
+                                    onClick={() => handleSeatSelect(seat)}
+                                    className="btn m-2"
+                                    style={{
+                                      background:
+                                        selectedSeats.includes(seat) ||
+                                          bookedSeat?.includes(seat)
+                                          ? "orangered"
+                                          : "rgb(252, 233, 85)",
+                                    }}
+                                    disabled={
+                                      bookedSeat?.includes(seat) ? true : false
+                                    }
+                                    key={seat}
+                                  >
+                                    {seat}
+                                  </button>
+                                ))}
+                              </div>
+                              <div className="grid grid-cols-2 ">
+                                {halfSeats2?.map((seat) => (
+                                  <button
+                                    onClick={() => handleSeatSelect(seat)}
+                                    className="btn mt-2 ms-2"
+                                    style={{
+                                      background:
+                                        selectedSeats.includes(seat) ||
+                                          bookedSeat?.includes(seat)
+                                          ? "orangered"
+                                          : "rgb(252, 233, 85)",
+                                    }}
+                                    disabled={
+                                      bookedSeat?.includes(seat) ? true : false
+                                    }
+                                    key={seat}
+                                  >
+                                    {seat}
+                                  </button>
+                                ))}
+                              </div>
+                            </>
+                          )}
+                          <div></div>
+                        </div>
+                      }
 
                       <div className="flex justify-center mt-4">
                         {counter > 0 && (
@@ -482,7 +537,7 @@ const BookTicket = () => {
             <div className="">
               <form method="dialog">
                 {/* if there is a button, it will close the modal */}
-                <button onClick={() => handleBookTicket(searchBus)} className="btn btn-block brand-btn mt-2">
+                <button onClick={handleBookTicket} className="btn btn-block brand-btn mt-2">
                   Pay
                 </button>
                 <button className="btn btn-block bg-black text-white mt-2 hover:bg-black hover:text-orange-500">

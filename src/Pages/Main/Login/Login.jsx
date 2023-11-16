@@ -13,7 +13,8 @@ const Login = () => {
     reset,
   } = useForm();
 
-  const { signIn, user, createUserWithGoogle, loading, setLoading } = useContext(AuthContext);
+  const { signIn, user, createUserWithGoogle,setReload, loading, setLoading } =
+    useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -28,6 +29,7 @@ const Login = () => {
           timer: 3000,
         });
         setLoading(false);
+        setReload(false);
         navigate(from, { replace: true });
         reset();
       })

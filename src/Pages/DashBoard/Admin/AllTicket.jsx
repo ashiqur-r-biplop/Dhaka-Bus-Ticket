@@ -48,7 +48,7 @@ const AllTicket = () => {
       </div>
       <div>
         {/* ******************* serach ************** */}
-      <div className="">
+      <div className="my-2">
             <button className="brand-btn btn-block p-2  transition duration-75">
               Search Here:{" "}
               <input

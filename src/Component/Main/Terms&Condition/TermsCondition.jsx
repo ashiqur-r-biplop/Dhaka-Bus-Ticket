@@ -15,7 +15,7 @@ const TermsCondition = () => {
             </p>
 
             <div className="space-y-4">
-              <details className="w-full border rounded-lg">
+              <details className="w-full border rounded-lg cursor-pointer">
                 <summary className="px-4 py-6 focus:outline-none focus-visible:ri">
                   Insurance Coverage Terms & Conditions
                 </summary>
@@ -27,7 +27,7 @@ const TermsCondition = () => {
                 </p>
               </details>
 
-              <details className="w-full border rounded-lg">
+              <details className="w-full border rounded-lg cursor-pointer">
                 <summary className="px-4 py-6 focus:outline-none focus-visible:ri">
                   Special Terms & Conditions
                 </summary>
@@ -56,7 +56,7 @@ const TermsCondition = () => {
                 </p>
               </details>
 
-              <details className="w-full border rounded-lg">
+              <details className="w-full border rounded-lg cursor-pointer">
                 <summary className="px-4 py-6 focus:outline-none focus-visible:ri">
                   Ticket Delivery mode
                 </summary>
@@ -79,7 +79,7 @@ const TermsCondition = () => {
                 </p>
               </details>
 
-              <details className="w-full border rounded-lg">
+              <details className="w-full border rounded-lg cursor-pointer">
                 <summary className="px-4 py-6 focus:outline-none focus-visible:ri">
                   Getting copy of lost ticket
                 </summary>
@@ -94,7 +94,7 @@ const TermsCondition = () => {
                 </p>
               </details>
 
-              <details className="w-full border rounded-lg">
+              <details className="w-full border rounded-lg cursor-pointer">
                 <summary className="px-4 py-6 focus:outline-none focus-visible:ri">
                   Regarding pricing policy
                 </summary>
@@ -113,7 +113,7 @@ const TermsCondition = () => {
                 </p>
               </details>
 
-              <details className="w-full border rounded-lg">
+              <details className="w-full border rounded-lg cursor-pointer">
                 <summary className="px-4 py-6 focus:outline-none focus-visible:ri">
                   Refund Policy
                 </summary>
@@ -131,7 +131,7 @@ const TermsCondition = () => {
                 </p>
               </details>
 
-              <details className="w-full border rounded-lg">
+              <details className="w-full border rounded-lg cursor-pointer">
                 <summary className="px-4 py-6 focus:outline-none focus-visible:ri">
                   Payment methods
                 </summary>
@@ -144,7 +144,7 @@ const TermsCondition = () => {
                 </p>
               </details>
 
-              <details className="w-full border rounded-lg">
+              <details className="w-full border rounded-lg cursor-pointer">
                 <summary className="px-4 py-6 focus:outline-none focus-visible:ri">
                   Regarding Journey Timing and e-ticket
                 </summary>
@@ -160,7 +160,7 @@ const TermsCondition = () => {
                 </p>
               </details>
 
-              <details className="w-full border rounded-lg">
+              <details className="w-full border rounded-lg cursor-pointer">
                 <summary className="px-4 py-6 focus:outline-none focus-visible:ri">
                   Holiday Ticket Cancellation Policies
                 </summary>
