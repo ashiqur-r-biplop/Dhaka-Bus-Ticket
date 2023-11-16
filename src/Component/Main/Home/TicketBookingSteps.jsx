@@ -4,7 +4,7 @@ import './Banner';
 
 const TicketBookingSteps = () => {
 
-     const [bgColor, setBgColor] = useState("Booking & Confirm");
+     const [bgColor, setBgColor] = useState("select your bus");
 
 
 

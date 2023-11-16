@@ -77,9 +77,8 @@ const Navbar = () => {
   return (
     <header className="w-full  z-[50] fixed top-0">
       <nav
-        className={`py-4  lg:px-14 px-4 bg-gray-900 ${
-          isSticky ? "shadow" : ""
-        }`}
+        className={`py-4  lg:px-14 px-4 bg-gray-900 ${isSticky ? "shadow" : ""
+          }`}
       >
         <div className="container mx-auto">
           <div className="flex justify-between items-center gap-8">
@@ -184,9 +183,8 @@ const Navbar = () => {
 
           {/* items for mobile device*/}
           <div
-            className={`space-y-4 px-4 mt-16 brand-bg ${
-              isMenuOpen ? "block fixed top-0 right-0 left-0" : "hidden"
-            }`}
+            className={`space-y-4 px-4 mt-16 bg-black ${isMenuOpen ? "block fixed top-0 right-0 left-0" : "hidden"
+              }`}
           >
             {navItem.map(({ link, path }) => (
               <NavLink
