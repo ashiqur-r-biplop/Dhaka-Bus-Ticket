@@ -8,7 +8,7 @@ const PrivacyAndPolicy = () => {
           PRIVACY POLICY
         </h1>
         <div className="space-y-5 pl-5 text-lg mt-3">
-          <p>
+          <p className="">
             We, at shohoz.com, ensure to maintain the highest standards of
             transactional security and quality so that your information and
             details are secure. To know more about our policies please read the
@@ -46,12 +46,12 @@ const PrivacyAndPolicy = () => {
               Information
             </h1>
             <div className="space-y-1">
-              <p>
+              <p className="text-gray-500">
                 When you use our Website, we store your browsing information so
                 that we canprovide services and features that meet your needs,.
               </p>
 
-              <p>
+              <p className="text-gray-500">
                 In general, you can browse the Website without telling us who
                 you are or revealing any personal information about yourself.
                 Once you give us your personal information, you are not
@@ -66,7 +66,7 @@ const PrivacyAndPolicy = () => {
                 not), your computer browser information, and your IP address.
               </p>
 
-              <p>
+              <p className="text-gray-500">
                 We use data collection devices such as "cookies (small file
                 stored on your computer)" on certain pages of the Website to
                 help analyse our web page flow, measure promotional
@@ -74,14 +74,14 @@ const PrivacyAndPolicy = () => {
                 features that are only available through the use of a "cookie".
               </p>
 
-              <p>
+              <p className="text-gray-500">
                 Additionally, third parties may also place cookies or similar
                 devices on our website, which we cannot control. If you choose
                 to buy on the Website, we collect information about your buying
                 behaviour.
               </p>
 
-              <p>
+              <p className="text-gray-500">
                 If you transact with us, we collect some additional information,
                 such as a billing address, a credit / debit card number and a
                 credit / debit card expiration date and/ or other payment
@@ -92,14 +92,14 @@ const PrivacyAndPolicy = () => {
                 by law.
               </p>
 
-              <p>
+              <p className="text-gray-500">
                 If you send us personal correspondence, such as emails or
                 letters, or if other users or third parties send us
                 correspondence about your activities or postings on the Website,
                 we may collect such information into a file specific to you.
               </p>
 
-              <p>
+              <p className="text-gray-500">
                 We collect personally identifiable information (email address,
                 name, phone number.) from you when you set up a free account
                 with us. We do use your contact information to send you offers
@@ -115,7 +115,7 @@ const PrivacyAndPolicy = () => {
           <div className="pl-5 mt-3 space-y-5 text-lg">
             <h1 className="text-2xl">2. Sharing of personal information</h1>
             <div className="space-y-1">
-              <p>
+              <p className="text-gray-500">
                 We will only share personal information with companies,
                 organizations or individuals outside the periphery of Shohoz.com
                 if we have a good-faith and believe that access, use,
@@ -123,14 +123,14 @@ const PrivacyAndPolicy = () => {
                 necessary to:
               </p>
 
-              <p>
+              <p className="text-gray-500">
                 meet any applicable law, regulation, legal process or
                 enforceable governmental request. enforce applicable Terms of
                 Service, including investigation of potential violations.
                 detect, prevent, or otherwise address fraud, security or
                 technical issues.
               </p>
-              <p>
+              <p className="text-gray-500">
                 protect against harm to the rights, property or safety of
                 Shohoz.com, our users or the public as required or permitted by
                 law. We may share aggregated, non-personally identifiable
@@ -142,7 +142,7 @@ const PrivacyAndPolicy = () => {
                 individual names, email ids or other contact details.
               </p>
 
-              <p>
+              <p className="text-gray-500">
                 If Shohoz.com is involved in a merger, acquisition or asset
                 sale, we will continue to ensure the confidentiality of your
                 personal information and give notice before personal information
@@ -153,7 +153,7 @@ const PrivacyAndPolicy = () => {
           <div className="pl-5 mt-3 space-y-5 text-lg">
             <h1 className="text-2xl"> 3. Your Consent</h1>
             <div className="space-y-1">
-              <p>
+              <p className="text-gray-500">
                 By using the Website and/ or by providing your information, you
                 consent to the collection and use of the information you
                 disclose on the Website in accordance with this Privacy Policy,
@@ -161,7 +161,7 @@ const PrivacyAndPolicy = () => {
                 information as per this privacy policy.
               </p>
 
-              <p>
+              <p className="text-gray-500">
                 We may decide to make amends to this privacy policy without
                 prior information, therefore, it is suggested you review this
                 page at regular intervals. This ensures you are up-to-date with

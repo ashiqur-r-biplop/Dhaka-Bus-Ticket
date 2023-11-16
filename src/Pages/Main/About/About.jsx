@@ -59,13 +59,13 @@ const About = () => {
             />
           </div>
 
-          <div className="space-y-3 w-[50%]">
+          <div className="space-y-3 md:w-[50%]">
             <div className="collapse">
               <input type="radio" name="my-accordion-1" checked="checked" />
               <div className="collapse-title text-xl font-medium text-orange-600">
-              What We Offer?
+                What We Offer?
               </div>
-              <div className="collapse-content">
+              <div className="collapse-content text-justify">
                 <p> DhakaTicket.com enables consumers to purchase tickets from any
                   location at any time, just by using your mobile phone. You can
                   rest assured that your payment will be transfer safely through
@@ -82,7 +82,7 @@ const About = () => {
             <div className="collapse">
               <input type="radio" name="my-accordion-1" />
               <div className="collapse-title text-xl font-medium text-orange-600">
-              About Us?
+                About Us?
               </div>
               <div className="collapse-content">
                 <p>DhakaTicket.com is a premium online booking portal which
