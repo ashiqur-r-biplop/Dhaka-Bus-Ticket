@@ -2,7 +2,7 @@ import gimg from "../../../assets/Bus/faq.jpg";
 
 const Faq = () => {
   return (
-    <section className="bg-black">
+    <section className="bg-orange-300 mt-10">
       <div className="hero md:h-[50vh]  ">
         <div className="max-w-[1200px] mx-auto">
           <div className="hero-content flex-col lg:flex-row-reverse">
@@ -26,7 +26,7 @@ const Faq = () => {
       {/*  */}
 
       <div className="">
-        <div className=" md:w-[1200px] mx-auto p-10 bg-black rounded-xl ">
+        <div className=" md:w-[1200px] mx-auto p-10 bg-orange-300 rounded-xl ">
           {/*  */}
 
           <div className="collapse collapse-arrow join-item border border-base-300 my-6">
