@@ -16,8 +16,9 @@ const UserProfile = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [selectedContact, setSelectedContact] = useState(null);
   const [bills, setBills] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-
+console.log(bills,"284972389479237492342398");
   const fetchData = async () => {
     try {
       if (userEmail) {
@@ -40,7 +41,7 @@ const UserProfile = () => {
     fetchData();
   }, [userEmail, control]);
 
-  console.log(currentUser, "35");
+//   console.log(currentUser, "35");
 
   const time = new Date();
   const year = time.getFullYear();
@@ -67,7 +68,26 @@ const UserProfile = () => {
     const modal = document.getElementById("my_modal_1");
     modal.showModal();
   };
-
+// bills 
+useEffect(() => {
+     setLoading(true);
+     fetch(`https://dhaka-bus-ticket-server.vercel.app/user-bills?email=${userEmail}`)
+       .then((res) => {
+         if (!res.ok) {
+           throw new Error("Failed to fetch user bills");
+         }
+         return res.json();
+       })
+       .then((data) => {
+         setBills(data);
+       })
+       .catch((error) => {
+         console.error("Error fetching user bills", error);
+       })
+       .finally(() => {
+         setLoading(false);
+       });
+   }, [userEmail]);
   return (
     <>
       <div className="max-w-[1200px] mx-auto w-[80%] grid md:grid-cols-2 pt-[100px]">
@@ -125,6 +145,7 @@ const UserProfile = () => {
                   <tr className="text-xl md:text-2xl text-white bg-[#FF4500]">
                     <th>Email </th>
                     <th className="">TransId</th>
+                    <th className="">Amount</th>
 
                   </tr>
                 </thead>
@@ -143,8 +164,9 @@ const UserProfile = () => {
                           {}
                         </span>
                       </td> */}
-                      <td className="font-semibold">{user.customerEmail}</td>
-                      <td className="font-semibold">{user.transitionId}</td>
+                      <td className="font-semibold">{user.email}</td>
+                      <td className="font-semibold">{user._id}</td>
+                      <td className="font-semibold">{user.amount}</td>
                     </tr>
                   ))}
                 </tbody>
