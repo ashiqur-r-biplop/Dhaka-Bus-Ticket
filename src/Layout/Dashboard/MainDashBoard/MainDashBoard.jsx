@@ -100,14 +100,17 @@ const MainDashBoard = () => {
 
   const adminOptions = (
     <>
-      <ActiveLink to="/">
+      {/* <ActiveLink to="/">
         <li>Home</li>
-      </ActiveLink>
+      </ActiveLink> */}
       {/* <ActiveLink to="/dashboard/postBus">
         <li>Post Bus</li>
       </ActiveLink> */}
       <ActiveLink to="/dashboard/all-ticket">
         <li>All Ticket</li>
+      </ActiveLink>
+      <ActiveLink to="/dashboard/user-contact">
+        <li>User Contact</li>
       </ActiveLink>
       <ActiveLink to="/dashboard/all-user">
         <li>All User</li>

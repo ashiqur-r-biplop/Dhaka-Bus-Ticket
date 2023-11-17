@@ -27,6 +27,7 @@ import PrivacyAndPolicy from "../Component/Main/PrivacyAndPolicy/PrivacyAndPolic
 import BusComplain from "../Pages/Main/BusComplain/BusComplain";
 import TravelTips from "../Pages/Main/TravelTips/TravelTips";
 import AllUsers from "../Pages/DashBoard/AllUsers/AllUsers";
+import UserContact from "../Pages/DashBoard/UserContact/UserContact";
 
 export const router = createBrowserRouter([
   {
@@ -142,6 +143,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AllTicket></AllTicket>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/user-contact",
+        element: (
+          <AdminRoute>
+             <UserContact></UserContact>
           </AdminRoute>
         ),
       },
