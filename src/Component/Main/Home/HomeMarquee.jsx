@@ -9,16 +9,16 @@ const HomeMarquee = () => {
   const { NoticeControl } = useContext(AuthContext);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/notices")
+      .get("https://dhaka-bus-ticket-server.vercel.app/notices")
       .then((res) => {
         setNotices(res.data);
-        setLoading(false);
+        // setLoading(false);
       })
       .catch((err) => console.log(err));
   }, []);
-  if (loading) {
-    return <>loading...</>;
-  }
+  // if (loading) {
+  //   return <>loading...</>;
+  // }
   return (
     <div className="md:px-20 px-6 flex gap-2 bg-gray-950 py-6">
       <span className="brand-color font-bold">নোটিশঃ</span>

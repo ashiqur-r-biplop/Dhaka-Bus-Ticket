@@ -17,16 +17,16 @@ const Count = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/subscriberCount")
+      .get("https://dhaka-bus-ticket-server.vercel.app/subscriberCount")
       .then((res) => {
         setSubscriberCount(res?.data?.count);
         setLoading(false);
       });
   }, [subscribeControl]);
   console.log(subscriberCount);
-  if (loading) {
-    return <>Loading...</>;
-  }
+  // if (loading) {
+  //   return <>Loading...</>;
+  // }
   return (
     <div className="max-w-[1200px] mx-5 md:mx-auto">
       <div className="mt-12 pb-8">
@@ -35,7 +35,7 @@ const Count = () => {
             { end: 100, postFix: "Million+", text: "Tickets Sold" },
             { end: 300, postFix: "+", text: "Routes" },
             { end: 10, postFix: "Million+", text: "Happy Users" },
-            { end: subscriberCount, postFix: "+", text: "Subscribers" },
+            { end: 1, postFix: "M+", text: "Subscribers" },
           ].map((s, i) => {
             return (
               <ScrollAnimation
