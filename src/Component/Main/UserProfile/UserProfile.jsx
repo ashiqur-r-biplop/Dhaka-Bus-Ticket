@@ -9,11 +9,14 @@ const UserProfile = () => {
     "https://i.pinimg.com/1200x/0f/66/bc/0f66bc842998ed2c6f82f85f702b0e44.jpg";
 
   const { user } = useContext(AuthContext);
-  console.log(user);
+  console.log(user, "12");
   const userEmail = user?.email;
   const photoURL = user?.photoURL;
   const [control, setControl] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+  const [selectedContact, setSelectedContact] = useState(null);
+  const [bills, setBills] = useState(null);
+   
 
   const fetchData = async () => {
     try {
@@ -48,35 +51,26 @@ const UserProfile = () => {
     month,
     year,
   };
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const name = form.name.value;
-    const number = form.phone.value;
-    const userInfo = { name, number };
-    console.log(userInfo);
-    const url = ""
-    try {
-      axios
-        .patch(`http://localhost:5000/single-user/${currentUser._id}`, userInfo)
-        .then((res) => {
-          console.log(res.data);
 
-          // Swal.fire({
-          //   position: "top",
-          //   icon: "success",
-          //   title: "User Profile Updated",
-          //   showConfirmButton: false,
-          //   timer: 1500,
-          // });
-        })
-        .catch((error) => { });
-    } catch (error) {
-      console.error("Error posting data:", error);
-    }
-    // form.reset();
-  };
-  const handleUpdate = () => { };
+  useEffect(()=>{
+     fetch('http://localhost:5000/user-bills?email=${userEmail}')
+     .then(res=>res.json())
+     .then(data=> {
+          setBills(data)
+     })
+  },[])
+
+
+
+
+
+
+//   handel fuction 
+const handleViewClick = (contact) => {
+     setSelectedContact(contact);
+     const modal = document.getElementById("my_modal_1");
+     modal.showModal();
+   };
 
   return (
     <>
@@ -170,7 +164,7 @@ const UserProfile = () => {
       </div>
       <UpdateUserProfileModal
         currentUser={currentUser}
-
+        selectedContact={selectedContact}
       ></UpdateUserProfileModal>
     </>
   );
