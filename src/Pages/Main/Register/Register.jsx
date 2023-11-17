@@ -60,7 +60,7 @@ const Register = () => {
               role: userData.role,
             };
 
-            fetch(`http://localhost:5000/users`, {
+            fetch(`https://dhaka-bus-ticket-server.vercel.app/users`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -125,7 +125,7 @@ const Register = () => {
           role: "user",
         };
 
-        fetch(`http://localhost:5000/users`, {
+        fetch(`https://dhaka-bus-ticket-server.vercel.app/users`, {
           method: "POST",
           headers: {
             "content-type": "application/json",

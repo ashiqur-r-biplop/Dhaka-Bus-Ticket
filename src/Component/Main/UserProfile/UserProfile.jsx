@@ -16,13 +16,13 @@ const UserProfile = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [selectedContact, setSelectedContact] = useState(null);
   const [bills, setBills] = useState(null);
-   
+
 
   const fetchData = async () => {
     try {
       if (userEmail) {
         const response = await fetch(
-          `http://localhost:5000/single-user?email=${userEmail}`
+          `https://dhaka-bus-ticket-server.vercel.app/single-user?email=${userEmail}`
         );
         if (!response.ok) {
           throw new Error("failed to fetch");
@@ -52,25 +52,21 @@ const UserProfile = () => {
     year,
   };
 
-  useEffect(()=>{
-     fetch('http://localhost:5000/user-bills?email=${userEmail}')
-     .then(res=>res.json())
-     .then(data=> {
-          setBills(data)
-     })
-  },[])
+  useEffect(() => {
+    fetch(`https://dhaka-bus-ticket-server.vercel.app/user-bills?email=${userEmail}`)
+      .then(res => res.json())
+      .then(data => {
+        setBills(data)
+      })
+  }, [])
 
 
-
-
-
-
-//   handel fuction 
-const handleViewClick = (contact) => {
-     setSelectedContact(contact);
-     const modal = document.getElementById("my_modal_1");
-     modal.showModal();
-   };
+  //   handel fuction 
+  const handleViewClick = (contact) => {
+    setSelectedContact(contact);
+    const modal = document.getElementById("my_modal_1");
+    modal.showModal();
+  };
 
   return (
     <>

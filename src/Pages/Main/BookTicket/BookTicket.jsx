@@ -103,7 +103,7 @@ const BookTicket = () => {
     console.log(data);
 
     setBookedTicketUsingUserInformation(data);
-    const url = `http://localhost:5000/getSeat/${data?.from}&&${data?.to}&&${data?.date}&&${data?.busType}&&${data?.schedule}`;
+    const url = `https://dhaka-bus-ticket-server.vercel.app/getSeat/${data?.from}&&${data?.to}&&${data?.date}&&${data?.busType}&&${data?.schedule}`;
     setLoadSeat(true)
     // Make the GET request
     fetch(url, {
@@ -152,7 +152,7 @@ const BookTicket = () => {
         .replace(/\//g, "-");
       console.log(bookedTicketUsingUserInformation);
 
-      fetch("http://localhost:5000/book-ticket", {
+      fetch("https://dhaka-bus-ticket-server.vercel.app/book-ticket", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(bookedTicketUsingUserInformation),
